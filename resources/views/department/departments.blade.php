@@ -7,27 +7,7 @@
 
 <section id="main-content">
 
-    <!-- <div class="row">
-        <div class="col-md-12">
-            <a onclick="history.back()"><button class="btn btn-primary">
-                Back
-            </button></a> 
-            <div class="card">
-             <div class="card-title">
-                <h4 style="margin-left: 3px;">Filters</h4>
-            </div>
-            <div class="card-body">
-                <form action="/departments/search" method="POST">
-                    @csrf
-                    <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </form> 
-                <a href="/departments" class="btn btn-danger btn-box">Cancel Search</a>
-            </div>
-        </div>
-    </div>
-</div> -->
-
+  
 <div class="row">
  <div class="col-lg-12">
     <div class="card">

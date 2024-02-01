@@ -27,7 +27,7 @@
                                 {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                                 @endif
 
-                                <form action="/topics/actinput" id="form_input" method="POST">
+                                <form autocomplete="on" action="/topics/actinput" id="form_input" method="POST">
                                     @csrf
                                     
                                     @if(Auth::User()->level->level == "Admin" )

@@ -10,7 +10,7 @@
                         @if($errors->any())
                         {!! implode('', $errors->all('<div style="color: red;">:message</div>')) !!}
                         @endif
-                        <form action="/actlogin" method="POST">
+                        <form autocomplete="off" action="/actlogin" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label>Username :</label>

@@ -27,7 +27,7 @@
                                 {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                                 @endif
 
-                                <form action="/topics/update" id="form_input" method="POST">
+                                <form autocomplete="on" action="/topics/update" id="form_input" method="POST">
                                     @csrf
 
                                     <input type="hidden" id="id" name="id" value="{{ $topic->id }}">

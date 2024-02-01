@@ -26,7 +26,7 @@
                                 {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                                 @endif
 
-                                <form action="/departments/members/actinput" id="form_input" method="POST">
+                                <form autocomplete="on" action="/departments/members/actinput" id="form_input" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Name:</label><br>

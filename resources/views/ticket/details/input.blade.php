@@ -12,7 +12,7 @@
         {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
         @endif
 
-        <form action="/departments/members/actinput" id="form_input" method="POST">
+        <form autocomplete="on" action="/departments/members/actinput" id="form_input" method="POST">
             @csrf
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" placeholder="Name" value="{{old('name')}}" required><br>
@@ -48,7 +48,7 @@
     document.getElementById("submitBtn").addEventListener("click", function(event){
         event.preventDefault();
         this.disabled = true;
-        document.getElementById("form_input").submit();
+        document.getElementById("form_input").submit();});
     </script>
 
     @include('foot')

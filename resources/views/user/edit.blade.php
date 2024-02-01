@@ -26,7 +26,7 @@
                                 @if($errors->any())
                                 {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                                 @endif
-                                <form action="/users/update" method="POST">
+                                <form autocomplete="on" action="/users/update" method="POST">
                                     @csrf
 
                                     <input type="hidden" id="id" name="id" value="{{ $user->id }}">

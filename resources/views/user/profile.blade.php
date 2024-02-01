@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="/profile/actProfile" method="POST"
+                                <form autocomplete="on" action="/profile/actProfile" method="POST"
                                 enctype="multipart/form-data">                        
                                 @csrf
                                 @if($errors->any())

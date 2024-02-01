@@ -22,7 +22,7 @@
                     {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                     @endif
                     <div class="basic-form">
-                        <form action="/transaction_in/actinput" id="form_input" method="POST">
+                        <form autocomplete="on" action="/transaction_in/actinput" id="form_input" method="POST">
                             @csrf
 
                             <div id="input-fields">

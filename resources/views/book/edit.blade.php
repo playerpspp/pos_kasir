@@ -27,7 +27,7 @@
 
 
                         <div class="basic-form">
-                            <form action="/books/update" method="POST">
+                            <form autocomplete="on" action="/books/update" method="POST">
                                 @csrf
 
                                 <input type="hidden" id="id" name="id" value="{{ $book->id }}">

@@ -52,10 +52,9 @@
                     @endif
                 </div><br>
             </div>
-            <!-- <form id="chat-form" method="POST" onsubmit="event.preventDefault(); submitChatMessage();"> -->
                 @if($ticket->status != "2")
                 <h3>Send a message</h3>
-                <form id="chat-form" method="POST" action="/tickets/details/input/{{$ticket->id}}"  enctype="multipart/form-data">
+                <form autocomplete="on" id="chat-form" method="POST" action="/tickets/details/input/{{$ticket->id}}"  enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <textarea required style="height: 80px;" class="form-control" placeholder="Give messages" type="text"  class="chat-message" id="chat-message" name="chat-message"></textarea>

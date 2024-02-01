@@ -23,7 +23,7 @@
                             {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                             @endif
 
-                            <form action="/tickets/actAssign/{{$id}}" id="form_input" method="POST">
+                            <form autocomplete="on" action="/tickets/actAssign/{{$id}}" id="form_input" method="POST">
                                 @csrf
 
                                 <h3>Ticket #{{$ticket->id}}:

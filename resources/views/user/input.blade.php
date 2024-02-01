@@ -26,7 +26,7 @@
                                 @if($errors->any())
                                 {!! implode('', $errors->all('<div id=alert-box>:message</div>')) !!}
                                 @endif
-                                <form action="/users/actinput" id="form_input" method="POST">
+                                <form autocomplete="on" action="/users/actinput" id="form_input" method="POST">
                                     @csrf
 
                                     <div class="form-group">
@@ -59,7 +59,7 @@
                             document.getElementById("submitBtn").addEventListener("click", function(event){
                                 event.preventDefault();
                                 this.disabled = true;
-                                document.getElementById("form_input").submit();
+                                document.getElementById("form_input").submit();});
                             </script>
 
                             @include('foot')

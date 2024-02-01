@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="/profile/actPassword" method="POST">
+                                <form autocomplete="off" action="/profile/actPassword" method="POST">
                                     @csrf
                                     @if($errors->any())
                                     {!! implode('', $errors->all('<div style="color: red;">:message</div>')) !!}

@@ -27,7 +27,7 @@
 
                             
                             <div class="basic-form">
-                                <form action="/books/actinput" id="form_input" method="POST">
+                                <form autocomplete="on" action="/books/actinput" id="form_input" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Book Name:</label><br>
