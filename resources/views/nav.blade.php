@@ -22,15 +22,15 @@
                  <li><a href="/departments/members/0"><i class="ti-user"></i> Members</a></li>
                  @endif
 
-                 <li><a class="sidebar-sub-toggle"><i class="ti-book"></i> Data <span
+                 <li><a class="sidebar-sub-toggle"><i class="ti-product"></i> Data <span
                     class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
-                        <li><a href="/books">Book</a></li>
+                        <li><a href="/products">Product</a></li>
                         <li><a href="/transaction_in">Purchase Income</a></li>
                         <li><a href="/transaction_out">Purchase Outcome </a></li>
                     </ul>
                 </li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-book"></i> Tickets <span
+                <li><a class="sidebar-sub-toggle"><i class="ti-product"></i> Tickets <span
                     class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                       @if(Auth::User()->level->level == "head" || Auth::User()->worker->user_id == Auth::User()->worker->department->head_id )
@@ -80,11 +80,11 @@
 
                     <div class="header-icon" data-toggle="dropdown">
                         <span class="user-avatar">
-                         @if(isset(Auth::user()->photo))
+                         <!-- @if(isset(Auth::user()->photo))
                          <img class="m-r-10 avatar-img"src="{{ asset('storage/images/avatar/'. Auth::user()->photo) }}" alt="" />
                          @else()
                          <img class="m-r-10 avatar-img"src="/images/avatar/default.jpg" alt="" />
-                         @endif
+                         @endif -->
 
                          {{Auth::user()->worker->name}}
                      </span>

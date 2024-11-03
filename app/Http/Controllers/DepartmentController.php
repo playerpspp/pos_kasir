@@ -402,7 +402,7 @@ public function deleteMember($id)
 {
     if (Auth::check()) {
 
-     if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+     if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
         abort(403, 'Unauthorized action.');
     }
     $work = Worker::where('id', $id)

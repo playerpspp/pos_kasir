@@ -31,11 +31,11 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <label for="Book">Buku:</label><br>
-                                                    <select required class="form-control" type="text" id="Book" name="Book[]" required>
-                                                        <option>Choose Book</option>
-                                                        @foreach ($books as $books)
-                                                        <option value="{{$books->id}}">{{$books->name}}</option>
+                                                    <label for="product">Buku:</label><br>
+                                                    <select required class="form-control" type="text" id="product" name="product[]" required>
+                                                        <option>Choose product</option>
+                                                        @foreach ($products as $product)
+                                                        <option value="{{$product->id}}">{{$product->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

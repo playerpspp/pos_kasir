@@ -2,7 +2,7 @@
 
 @include('nav')
 <head>
-    <title>Detail Book Income</title>
+    <title>Detail product Income</title>
 </head>
 <div class="row">
     <div class="col-md-12">
@@ -15,7 +15,7 @@
         <div class="card">
 
             <div class="card-title">
-                <h3 style="margin-left: 3px;">Detail #{{$num}} Book Income</h3>
+                <h3 style="margin-left: 3px;">Detail #{{$num}} product Income</h3>
             </div>
             <div class="card-body">
 
@@ -32,7 +32,7 @@
                                     <th width="10px">no</th>
                                     <th width="1000px">name</th>
                                     <th width="1000px">Amount</th>
-                                    <th width="1000px">price/book</th>
+                                    <th width="1000px">price/product</th>
                                     <th width="1000px">Total Price</th>
                                 </tr>
                             </thead>
@@ -42,13 +42,13 @@
                             @endphp
 
                             <tbody>
-                                @foreach ($detail as $detail)
+                                @foreach ($detail as $detai)
                                 <tr>
                                     <td width="10px">{{$no}}</td>
-                                    <td>{{ $detail->books->name }}</td>
-                                    <td>{{ $detail->total_amount}}</td>
-                                    <td>{{ $detail->price}}</td>
-                                    <td>{{ $detail->total_price }}</td>
+                                    <td>{{ $detai->products->name }}</td>
+                                    <td>{{ $detai->total_amount}}</td>
+                                    <td>{{ $detai->price}}</td>
+                                    <td>{{ $detai->total_price }}</td>
 
                                 </tr>
                                 @php

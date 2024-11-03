@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `books`
+-- Database: `products`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `books`
+-- Struktur dari tabel `products`
 --
 
-CREATE TABLE `books` (
+CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `books`
+-- Dumping data untuk tabel `products`
 --
 
-INSERT INTO `books` (`id`, `name`, `code`, `price`, `amount`, `worker_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `products` (`id`, `name`, `code`, `price`, `amount`, `worker_id`, `created_at`, `updated_at`) VALUES
 (1, 'naru', 'hodo', 30000, 5, NULL, '2023-03-11 04:36:36', NULL),
 (3, 'wewq', 'ewqeqw', 30000, 5, NULL, '2023-03-11 04:36:38', NULL),
 (4, 'vitka', '2342', 10000, 5, NULL, '2023-03-11 04:36:39', NULL),
@@ -132,7 +132,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2023_01_11_040228_create_transaction_in_details_table', 1),
 (7, '2023_01_11_040606_create_transaction_out_details_table', 1),
 (8, '2023_01_11_040617_create_transaction_out_table', 1),
-(9, '2023_01_11_072416_create_books_table', 2),
+(9, '2023_01_11_072416_create_products_table', 2),
 (10, '2023_04_02_131210_create_workers_table', 3);
 
 -- --------------------------------------------------------
@@ -296,7 +296,7 @@ INSERT INTO `transaction_in` (`id`, `price`, `worker_id`, `created_at`, `updated
 CREATE TABLE `transaction_in_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `transaction_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `book_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
   `price` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -307,7 +307,7 @@ CREATE TABLE `transaction_in_details` (
 -- Dumping data untuk tabel `transaction_in_details`
 --
 
-INSERT INTO `transaction_in_details` (`id`, `transaction_id`, `book_id`, `price`, `amount`, `created_at`, `updated_at`) VALUES
+INSERT INTO `transaction_in_details` (`id`, `transaction_id`, `product_id`, `price`, `amount`, `created_at`, `updated_at`) VALUES
 (27, 19, 1, 20000, 5, NULL, NULL),
 (28, 19, 3, 50000, 5, NULL, NULL),
 (29, 19, 4, 70000, 5, NULL, NULL),
@@ -318,21 +318,21 @@ INSERT INTO `transaction_in_details` (`id`, `transaction_id`, `book_id`, `price`
 --
 DELIMITER $$
 CREATE TRIGGER `transaction_in_details_after_delete` BEFORE DELETE ON `transaction_in_details` FOR EACH ROW BEGIN
-UPDATE books  
+UPDATE products  
 SET 
   amount = amount-old.amount
 WHERE 
-  id = old.book_id;
+  id = old.product_id;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `transaction_in_details_after_insert` AFTER INSERT ON `transaction_in_details` FOR EACH ROW BEGIN
-UPDATE books  
+UPDATE products  
 SET 
   amount = amount+NEW.amount
 WHERE 
-  id = NEW.book_id;
+  id = NEW.product_id;
 END
 $$
 DELIMITER ;
@@ -367,7 +367,7 @@ INSERT INTO `transaction_out` (`id`, `price`, `worker_id`, `created_at`, `update
 CREATE TABLE `transaction_out_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `transaction_id` bigint(20) UNSIGNED NOT NULL,
-  `book_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
   `price` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -378,7 +378,7 @@ CREATE TABLE `transaction_out_details` (
 -- Dumping data untuk tabel `transaction_out_details`
 --
 
-INSERT INTO `transaction_out_details` (`id`, `transaction_id`, `book_id`, `price`, `amount`, `created_at`, `updated_at`) VALUES
+INSERT INTO `transaction_out_details` (`id`, `transaction_id`, `product_id`, `price`, `amount`, `created_at`, `updated_at`) VALUES
 (21, 19, 1, 30000, 2, NULL, NULL);
 
 --
@@ -386,21 +386,21 @@ INSERT INTO `transaction_out_details` (`id`, `transaction_id`, `book_id`, `price
 --
 DELIMITER $$
 CREATE TRIGGER `transaction_out_details_after_delete` AFTER DELETE ON `transaction_out_details` FOR EACH ROW BEGIN
-UPDATE books  
+UPDATE products  
 SET 
   amount = amount+old.amount
 WHERE 
-  id = old.book_id;
+  id = old.product_id;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `transaction_out_details_after_insert` AFTER INSERT ON `transaction_out_details` FOR EACH ROW BEGIN
-UPDATE books  
+UPDATE products  
 SET 
   amount = amount-NEW.amount
 WHERE 
-  id = NEW.book_id;
+  id = NEW.product_id;
 END
 $$
 DELIMITER ;
@@ -467,12 +467,12 @@ INSERT INTO `workers` (`id`, `name`, `NIK`, `number`, `user_id`, `department_id`
 --
 
 --
--- Indeks untuk tabel `books`
+-- Indeks untuk tabel `products`
 --
-ALTER TABLE `books`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `Index 3` (`code`),
-  ADD KEY `FK_books_users` (`worker_id`) USING BTREE;
+  ADD KEY `FK_products_users` (`worker_id`) USING BTREE;
 
 --
 -- Indeks untuk tabel `departments`
@@ -559,7 +559,7 @@ ALTER TABLE `transaction_in`
 ALTER TABLE `transaction_in_details`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_transaction_in_details_transaction_in` (`transaction_id`),
-  ADD KEY `FK_transaction_in_details_books` (`book_id`);
+  ADD KEY `FK_transaction_in_details_products` (`product_id`);
 
 --
 -- Indeks untuk tabel `transaction_out`
@@ -596,9 +596,9 @@ ALTER TABLE `workers`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `books`
+-- AUTO_INCREMENT untuk tabel `products`
 --
-ALTER TABLE `books`
+ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -696,10 +696,10 @@ ALTER TABLE `workers`
 --
 
 --
--- Ketidakleluasaan untuk tabel `books`
+-- Ketidakleluasaan untuk tabel `products`
 --
-ALTER TABLE `books`
-  ADD CONSTRAINT `FK_books_workers` FOREIGN KEY (`worker_id`) REFERENCES `workers` (`id`);
+ALTER TABLE `products`
+  ADD CONSTRAINT `FK_products_workers` FOREIGN KEY (`worker_id`) REFERENCES `workers` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `departments`
@@ -739,7 +739,7 @@ ALTER TABLE `transaction_in`
 -- Ketidakleluasaan untuk tabel `transaction_in_details`
 --
 ALTER TABLE `transaction_in_details`
-  ADD CONSTRAINT `FK_transaction_in_details_books` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
+  ADD CONSTRAINT `FK_transaction_in_details_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `FK_transaction_in_details_transaction_in` FOREIGN KEY (`transaction_id`) REFERENCES `transaction_in` (`id`);
 
 --

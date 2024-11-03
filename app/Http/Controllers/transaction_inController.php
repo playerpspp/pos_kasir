@@ -62,9 +62,9 @@ public function input(Request $request)
 if (auth::user()->level->level == "guest" ) {
             abort(403, 'Unauthorized action.');
         }
-        // validate book input
+        // validate product input
     $validate = Validator::make($request->all(), [
-        'Book' => 'required|max:255',
+        'product' => 'required|max:255',
         'price' => 'required|max:10',
         'amount' => 'required|max:10',
     ]);
@@ -76,7 +76,7 @@ if (auth::user()->level->level == "guest" ) {
     }
             // dd($request);
 
-    $products = request()->input('Book');
+    $products = request()->input('product');
     $prices = request()->input('price');
     $amounts = request()->input('amount');
             // dd($prices);
@@ -93,10 +93,10 @@ if (auth::user()->level->level == "guest" ) {
     $transaction->save();
     $trans_id = $transaction->id;
 
-    foreach ($products as $key => $book) {
+    foreach ($products as $key => $product) {
         DB::table('transaction_in_details')->insert([
             'transaction_id'=> $trans_id,
-            'book_id' => $book,
+            'product_id' => $product,
             'price' => $prices[$key],
             'amount' => $amounts[$key],
         ]);
@@ -111,7 +111,7 @@ if (auth::user()->level->level == "guest" ) {
 
 public function delete($id)
 {
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -129,9 +129,9 @@ public function detail($id)
 
 
         // $detail = in_detail::where('transaction_id', $id)->get();
-    $detail = in_detail::select('book_id', DB::raw('SUM(price * amount) as total_price'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(price) as price'))
+    $detail = in_detail::select('product_id', DB::raw('SUM(price * amount) as total_price'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(price) as price'))
     ->where('transaction_id', $id)
-    ->groupBy('book_id')
+    ->groupBy('product_id')
     ->get();
     $sum = in_detail::select(DB::raw('SUM(price * amount) as total_sum'))
     ->where('transaction_id', $id)
@@ -144,7 +144,7 @@ public function detail($id)
 
 public function exportPdf(Request $request)
 {
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
         // dd($request);
@@ -170,7 +170,7 @@ $pdf->stream("Laporan Pemasukan.pdf", array("Attachment" => false));
 
 public function exportExcel(Request $request)
 {
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 $start = $request->input('start_date');

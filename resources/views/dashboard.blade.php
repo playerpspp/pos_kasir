@@ -16,7 +16,7 @@
             <br>
             <div class="card-body">
                 @if (auth::user()->level->level != 'guest' && auth::user()->level->level != 'pekerja')
-                <a href="/books/input" class="btn btn-warning btn-box">Mendata Buku baru</a>
+                <a href="/products/input" class="btn btn-warning btn-box">Mendata Buku baru</a>
                 @endif
             </div>
             <br>

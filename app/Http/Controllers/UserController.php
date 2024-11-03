@@ -193,7 +193,7 @@ public function password()
 public function actProfile(Request $request)
 {
     $id = Auth::user()->id;
-    $oldPhoto = Auth::user()->photo;
+    // $oldPhoto = Auth::user()->photo;
 
     $validate = Validator::make($request->all(), [
         'username' => 'required',
@@ -208,24 +208,24 @@ public function actProfile(Request $request)
     }
     
 
-    $photo = $request->file('photo');
+    // $photo = $request->file('photo');
 
-    if(isset($photo) ){
+    // if(isset($photo) ){
 
-        $extension = $photo->getClientOriginalExtension();
-        $filename = Str::random(20) . '.' . $extension;
+    //     $extension = $photo->getClientOriginalExtension();
+    //     $filename = Str::random(20) . '.' . $extension;
 
-        $path = $photo->storeAs('public/images/avatar', $filename);
+    //     $path = $photo->storeAs('public/images/avatar', $filename);
 
-        if (!empty($oldPhoto)) {
-            Storage::delete('public/images/avatar/' . $oldPhoto);
-        }
-    }
+    //     if (!empty($oldPhoto)) {
+    //         Storage::delete('public/images/avatar/' . $oldPhoto);
+    //     }
+    // }
     $user = User::where('id', $id)
     ->update([
         'name' => $request->input('username'),
         'email' => $request->input('email'),
-        'photo' => $filename,
+        // 'photo' => $filename,
     ]);
     
 

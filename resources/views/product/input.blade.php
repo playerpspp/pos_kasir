@@ -3,7 +3,7 @@
 @include('nav')
 
 <head>
-    <title>Input New Book</title>
+    <title>Input New Product</title>
 </head>
 
 <div class="content-wrap">
@@ -15,7 +15,7 @@
                     <button class="btn btn-primary" title="Back" onclick="history.back()"><i class="ti-arrow-left"></i></button>
                     <div class="card">
                         <div class="card-title">
-                            <h3>NEW BOOK</h3>
+                            <h3>NEW Product</h3>
                         </div>
                         <br>
                         <div class="card-body">
@@ -27,20 +27,20 @@
 
                             
                             <div class="basic-form">
-                                <form autocomplete="on" action="/books/actinput" id="form_input" method="POST">
+                                <form autocomplete="on" action="/products/actinput" id="form_input" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="name">Book Name:</label><br>
+                                        <label for="name">Product Name:</label><br>
                                         <input class="form-control" type="text" id="name" name="name" placeholder="Name" value="{{old('name')}}" required>
                                     </div><br>
 
                                     <div class="form-group">
-                                        <label for="code">Book Code:</label><br>
+                                        <label for="code">Product Code:</label><br>
                                         <input class="form-control" type="text" id="code" name="code" placeholder="code" value="{{old('code')}}" required>
                                     </div><br>
 
                                     <div class="form-group">
-                                        <label for="price">Book Price:</label><br>
+                                        <label for="price">Product Price:</label><br>
                                         <input class="form-control" type="text" id="price" name="price" placeholder="price" value="{{old('price')}}"  required >
                                     </div><br>
 

@@ -8,7 +8,7 @@
            <th>No</th>
            <th>Name</th>
            <th>Amount</th>
-           <th>Price/Book</th>
+           <th>Price/product</th>
            <th>Total Price</th>
        </tr>
    </thead>
@@ -21,7 +21,7 @@
     @foreach ($details as $detail)
     <tr>
         <td>{{$no}}</td>
-        <td>{{ $detail->books->name }}</td>
+        <td>{{ $detail->products->name }}</td>
         <td>{{ $detail->amount}}</td>
         <td>Rp {{$detail->price}}</td>
         <td>Rp {{ $totalPrices[$detail->id] }}</td>

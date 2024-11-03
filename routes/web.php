@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\books;
+use App\Models\products;
 use App\Models\Topic;
 
 /*
@@ -55,17 +55,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/workers/update', 'App\Http\Controllers\WorkerController@update');
     Route::post('/workers/actinput', 'App\Http\Controllers\WorkerController@actInput');
 
-//books table
+//products table
 
-    Route::get('/books', 'App\Http\Controllers\BookController@index');
-    Route::get('/books/actdelete/{id}', 'App\Http\Controllers\BookController@delete');
-    Route::get('/books/edit/{id}', 'App\Http\Controllers\BookController@edit');
-    Route::get('/books/input','App\Http\Controllers\BookController@show');
+    Route::get('/products', 'App\Http\Controllers\ProductController@index');
+    Route::get('/products/actdelete/{id}', 'App\Http\Controllers\ProductController@delete');
+    Route::get('/products/edit/{id}', 'App\Http\Controllers\ProductController@edit');
+    Route::get('/products/input','App\Http\Controllers\ProductController@show');
 
-    Route::post('/books/pdf', 'App\Http\Controllers\BookController@exportPdf');
-    Route::post('/books/excel', 'App\Http\Controllers\BookController@exportExcel');
-    Route::post('/books/update', 'App\Http\Controllers\BookController@update');
-    Route::post('/books/actinput', 'App\Http\Controllers\BookController@input');
+    Route::post('/products/pdf', 'App\Http\Controllers\ProductController@exportPdf');
+    Route::post('/products/excel', 'App\Http\Controllers\ProductController@exportExcel');
+    Route::post('/products/update', 'App\Http\Controllers\ProductController@update');
+    Route::post('/products/actinput', 'App\Http\Controllers\ProductController@input');
 
     
 

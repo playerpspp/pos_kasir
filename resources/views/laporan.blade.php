@@ -84,15 +84,15 @@
 </div> 
 
 <script>
-    //book
+    //product
   function generatePDF() {
     var form = document.getElementById("Laporan");
-    form.action = "/books/pdf";
+    form.action = "/products/pdf";
     form.submit();
 }
 function generateExcel() {
     var form = document.getElementById("Laporan");
-    form.action = "/books/excel";
+    form.action = "/products/excel";
     form.submit();
 }
     //transaction_in

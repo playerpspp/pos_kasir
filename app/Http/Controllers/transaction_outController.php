@@ -62,7 +62,7 @@ class transaction_outController extends Controller
         }
 
         $validate = Validator::make($request->all(), [
-            'Book' => 'required',
+            'product' => 'required',
             'amount' => 'required|max:10',
         ]);
         if ($validate->fails())
@@ -72,12 +72,12 @@ class transaction_outController extends Controller
             ->withInput();
         }
 
-        $products = request()->input('Book');
+        $products = request()->input('product');
         $amounts = request()->input('amount');
         $prices = [];
 
-        foreach ($products as $key => $book) {
-            $data= products::where('id', $book)->first();
+        foreach ($products as $key => $product) {
+            $data= products::where('id', $product)->first();
             $prices[$key]=$data->price;
         }
 
@@ -91,10 +91,10 @@ class transaction_outController extends Controller
         $transaction->save();
         $trans_id = $transaction->id;
         
-        foreach ($products as $key => $book) {
+        foreach ($products as $key => $product) {
             DB::table('transaction_out_details')->insert([
                 'transaction_id'=> $trans_id,
-                'book_id' => $book,
+                'product_id' => $product,
                 'price' => $prices[$key],
                 'amount' => $amounts[$key],
             ]);
@@ -110,7 +110,7 @@ class transaction_outController extends Controller
     public function delete($id)
     {
 
-     if (Auth::user()->level->level != "admin" && Auth::user()->level->level != "head") {
+     if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
         abort(403, 'Unauthorized action.');
     }
 
@@ -131,9 +131,9 @@ public function detail($id)
     }
 
         // $detail = in_detail::where('transaction_id', $id)->get();
-    $detail =  out_detail::select('book_id', DB::raw('SUM(price) as total_price'), DB::raw('SUM(amount) as total_amount'))
+    $detail =  out_detail::select('product_id', DB::raw('SUM(price) as total_price'), DB::raw('SUM(amount) as total_amount'))
     ->where('transaction_id', $id)
-    ->groupBy('book_id')
+    ->groupBy('product_id')
     ->get();
     $sum = out_detail::select(DB::raw('SUM(price * amount) as total_sum'))
     ->where('transaction_id', $id)
@@ -147,7 +147,7 @@ public function detail($id)
 public function exportPdf(Request $request)
 {
 
- if (Auth::user()->level->level != "admin" && Auth::user()->level->level != "head") {
+ if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -176,7 +176,7 @@ $pdf->stream("Laporan Penjualan.pdf", array("Attachment" => false));
 
 public function exportExcel()
 { 
-    if (Auth::user()->level->level != "admin" && Auth::user()->level->level != "head") {
+    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
         abort(403, 'Unauthorized action.');
     }
 

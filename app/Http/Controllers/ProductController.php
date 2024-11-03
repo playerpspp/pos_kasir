@@ -11,7 +11,7 @@ use App\Models\in_transaction;
 use App\Models\in_detail;
 use App\Models\out_transaction;
 use App\Models\out_detail;
-use App\Exports\BooksExport;
+use App\Exports\ProductsExport;
 use Illuminate\Support\Facades\DB;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,7 +44,7 @@ public function index()
 
 public function show()
 {
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -54,7 +54,7 @@ return view('product.input',);
 
 public function input(Request $request)
 {
-    if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -92,7 +92,7 @@ public function input(Request $request)
 public function delete($id)
 {
 
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -109,7 +109,7 @@ return redirect('/products');
 
 public function edit($id)
 {
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -123,7 +123,7 @@ return view('product.edit', ['product' => $product]);
 
 public function update(Request $request)
 {
-    if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -155,7 +155,7 @@ public function update(Request $request)
 
 public function exportPdf()
 {
-    if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
@@ -167,29 +167,29 @@ public function exportPdf()
     ->where('created_at','<=',$end)
     ->pluck('id');
 
-    $transIn = in_detail::select('book_id', 
+    $transIn = in_detail::select('product_id', 
         DB::raw('SUM(amount) as total_amount'),
         DB::raw('MIN(price) as min_price'),
         DB::raw('MAX(price) as max_price'))
     ->whereIn('transaction_id', $transInIDs)
-    ->groupBy('book_id')
-    ->orderBy('book_id', 'Asc')
+    ->groupBy('product_id')
+    ->orderBy('product_id', 'Asc')
     ->get()
-    ->keyBy('book_id');
+    ->keyBy('product_id');
 
     $transOutIDs = out_transaction::where('created_at','>=',$start)
     ->where('created_at','<=',$end)
     ->pluck('id');
 
-    $transOut = out_detail::select('book_id', 
+    $transOut = out_detail::select('product_id', 
         DB::raw('SUM(amount) as total_amount'),
         DB::raw('MIN(price) as min_price'),
         DB::raw('MAX(price) as max_price'))
     ->whereIn('transaction_id', $transOutIDs)
-    ->groupBy('book_id')
-    ->orderBy('book_id', 'Asc')
+    ->groupBy('product_id')
+    ->orderBy('product_id', 'Asc')
     ->get()
-    ->keyBy('book_id');
+    ->keyBy('product_id');
 
     $products = products::all();
     $pdf = new Dompdf();
@@ -201,11 +201,11 @@ public function exportPdf()
 
 public function exportExcel()
 {
-   if (Auth::user()->level->level != "Admin" && Auth::user()->level->level != "head") {
+   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
-return Excel::download(new BooksExport, 'Laporan Buku.xlsx');
+return Excel::download(new ProductsExport, 'Laporan Buku.xlsx');
 }
 
 

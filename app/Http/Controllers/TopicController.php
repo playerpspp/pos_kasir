@@ -80,12 +80,12 @@ class TopicController extends Controller
         if ($validate->fails())
         {
             $id= $request->id;
-            return redirect("/books/input")
+            return redirect("/products/input")
             ->withErrors($validate)
             ->withInput();
         }
 
-        // create new book
+        // create new product
         $topic = new Topic();
         $topic->name = $request->input('topic');
         if(auth::User()->level->level == 'Admin'){
@@ -97,7 +97,7 @@ class TopicController extends Controller
 
         $topic->save();
 
-        // redirect to books list
+        // redirect to products list
         return redirect('/topics'); 
 
 
@@ -132,12 +132,12 @@ class TopicController extends Controller
         if ($validate->fails())
         {
             $id= $request->id;
-            return redirect("/books/input")
+            return redirect("/products/input")
             ->withErrors($validate)
             ->withInput();
         }
 
-        // create new book
+        // create new product
         if(auth::User()->level->level == 'Admin'){
             $Topic = Topic::where('id', $request->id)
             ->update([

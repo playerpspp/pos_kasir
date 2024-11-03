@@ -3,7 +3,7 @@
 @include('nav')
 
 <head>
-    <title>Book Purchases Outcome Table</title>
+    <title>product Purchases Outcome Table</title>
     <link href="/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     <link href="/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
 </head>
@@ -14,7 +14,7 @@
             <div class="card-body">
 
                 <div class="card-title">
-                    <h3 style="margin-left: 3px;">Book Purchases Outcome Table</h3>
+                    <h3 style="margin-left: 3px;">product Purchases Outcome Table</h3>
                 </div>
 
                 <a style="margin-left: 5px;" href="/transaction_out/input"><button class="btn btn-success" title="Add new"><i class="ti-plus"></i></button></a>

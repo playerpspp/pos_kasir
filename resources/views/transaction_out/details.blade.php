@@ -3,7 +3,7 @@
 @include('nav')
 
 <head>
-    <title>>Detail Book Outcome</title>
+    <title>>Detail product Outcome</title>
     <link href="/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     <link href="/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
 </head>
@@ -21,7 +21,7 @@
                 @endphp
 
                 <div class="card-title">
-                    <h3 style="margin-left: 3px;">Detail #{{$num}} Book Outcome</h3>
+                    <h3 style="margin-left: 3px;">Detail #{{$num}} product Outcome</h3>
                 </div>
 
                 <br>
@@ -45,12 +45,12 @@
                             @endphp
 
                             <tbody>
-                                @foreach ($detail as $detail)
+                                @foreach ($detail as $detai)
                                 <tr>
                                     <td width="10px">{{$no}}</td>
-                                    <td>{{ $detail->books->name }}</td>
-                                    <td>{{ $detail->total_amount}}</td>
-                                    <td>{{ $detail->total_price }}</td>
+                                    <td>{{ $detai->products->name }}</td>
+                                    <td>{{ $detai->total_amount}}</td>
+                                    <td>{{ $detai->total_price }}</td>
 
                                 </tr>
                                 @php

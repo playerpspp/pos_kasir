@@ -3,7 +3,7 @@
 @include('nav')
 
 <head>
-    <title>Edit Book {{$book->name}}</title>
+    <title>Edit Product {{$product->name}}</title>
 </head>
 
 <div class="content-wrap">
@@ -15,7 +15,7 @@
                 <button class="btn btn-primary" title="Back" onclick="history.back()"><i class="ti-arrow-left"></i></button>
                 <div class="card">
                     <div class="card-title">
-                        <h3>Edit BOOK: {{$book->name}}</h3>
+                        <h3>Edit Product: {{$product->name}}</h3>
                     </div>
                     <br>
                     <div class="card-body">
@@ -27,24 +27,24 @@
 
 
                         <div class="basic-form">
-                            <form autocomplete="on" action="/books/update" method="POST">
+                            <form autocomplete="on" action="/Products/update" method="POST">
                                 @csrf
 
-                                <input type="hidden" id="id" name="id" value="{{ $book->id }}">
+                                <input type="hidden" id="id" name="id" value="{{ $product->id }}">
 
                                 <div class="form-group">
                                     <label for="name">Name:</label><br>
-                                    <input class="form-control" type="text" id="name" name="name" placeholder="Name" value="{{ $book->name }}" required>
+                                    <input class="form-control" type="text" id="name" name="name" placeholder="Name" value="{{ $product->name }}" required>
                                 </div><br>
 
                                 <div class="form-group">
                                     <label for="code">Code:</label><br>
-                                    <input class="form-control" type="text" id="code" name="code" placeholder="code" value="{{$book->code}}" required>
+                                    <input class="form-control" type="text" id="code" name="code" placeholder="code" value="{{$product->code}}" required>
                                 </div><br>
 
                                 <div class="form-group">
                                     <label for="price">Price:</label><br>
-                                    <input class="form-control" type="text" id="price" name="price" placeholder="price" value="{{$book->price}}"  required >
+                                    <input class="form-control" type="text" id="price" name="price" placeholder="price" value="{{$product->price}}"  required >
                                 </div><br>
 
 

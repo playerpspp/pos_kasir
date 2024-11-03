@@ -13,13 +13,13 @@
     $no++;
     @endphp
     <tbody align="center">
-        @foreach ($books as $book)
+        @foreach ($products as $product)
         <tr>
             <td>{{$no}}</td>
-            <td>{{ $book->name }}</td>
-            <td>{{ $book->code }}</td>
-            <td>{{ $book->amount }}</td>
-            <td>Rp {{ $book->price }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->code }}</td>
+            <td>{{ $product->amount }}</td>
+            <td>Rp {{ $product->price }}</td>
         </tr>
         @php
         $no++;

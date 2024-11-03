@@ -3,7 +3,7 @@
 @include('nav')
 
 <head>
-    <title>Books Table</title>
+    <title>Products Table</title>
     <link href="/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     <link href="/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
 </head>
@@ -14,10 +14,10 @@
             <div class="card-body">
 
                 <div class="card-title">
-                    <h3 style="margin-left: 3px;">Books Table</h3>
+                    <h3 style="margin-left: 3px;">Products Table</h3>
                 </div>
                 @if(auth::user()->level->level != "pekerja")
-                <a style="margin-left: 5px;" href="/books/input"><button class="btn btn-success" title="Add new"><i class="ti-plus"></i></button></a>            
+                <a style="margin-left: 5px;" href="/products/input"><button class="btn btn-success" title="Add new"><i class="ti-plus"></i></button></a>            
                 @endif
                 <div class="card-body">
                     <br>
@@ -42,13 +42,13 @@
                                 $no++;
                                 @endphp
 
-                                @foreach ($books as $book)
+                                @foreach ($products as $product)
                                 <tr>
                                     <td width="10px">{{$no}}</td>
-                                    <td>{{ $book->name }}</td>
-                                    <td>{{ $book->code }}</td>
-                                    <td>{{ $book->amount }}</td>
-                                    <td>{{ $book->price }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->code }}</td>
+                                    <td>{{ $product->amount }}</td>
+                                    <td>{{ $product->price }}</td>
                                     @if(isset($transaction->worker->name))
                                     <td>{{ $transaction->worker->name }}</td>
                                     @else
@@ -56,9 +56,9 @@
                                     @endif
                                     <td>
                                         @if(auth::user()->level->level != "pekerja")
-                                       <a href="/books/edit/{{$book->id}}"><button class="btn btn-warning" title="Detail"><i class="ti-pencil-alt"></i></button></a>
+                                       <a href="/products/edit/{{$product->id}}"><button class="btn btn-warning" title="Detail"><i class="ti-pencil-alt"></i></button></a>
 
-                                       <a href="/books/actdelete/{{$book->id}}"><button class="btn btn-danger" title="Delete"><i class="ti-trash"></i></button></a>
+                                       <a href="/products/actdelete/{{$product->id}}"><button class="btn btn-danger" title="Delete"><i class="ti-trash"></i></button></a>
                                        @endif
 
                                    </td>

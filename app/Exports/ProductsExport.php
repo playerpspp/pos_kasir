@@ -2,12 +2,12 @@
 
 namespace App\Exports;
 
-use App\Models\books;
+use App\Models\products;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
 
-class BooksExport implements FromView
+class ProductsExport implements FromView
 
 {
     /**
@@ -16,7 +16,7 @@ class BooksExport implements FromView
     public function view(): View
 
     {
-       $books = books::all();
-       return view('book.pdf', ['books' => $books]);
+       $products = products::all();
+       return view('product.pdf', ['products' => $products]);
     }
 }

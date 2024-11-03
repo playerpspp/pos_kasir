@@ -23,16 +23,16 @@
                                 @if($errors->any())
                                 {!! implode('', $errors->all('<div style="color: red;">:message</div>')) !!}
                                 @endif
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Photo Profile</label> <br>
-                                    <!-- @if(isset(Auth::user()->photo))
+                                    @if(isset(Auth::user()->photo))
                   
                                   <img class="m-r-10 avatar-img" src="{{ asset('storage/images/avatar/'. Auth::user()->photo) }}" alt="" />
                                   @else()
                                   <img class="m-r-10 avatar-img" src="/images/avatar/default.jpg" alt="" />
-                                  @endif -->
+                                  @endif
                                   <input class="form-control" type="file" id="photo" name="photo">
-                              </div>
+                              </div> -->
 
                               <div class="form-group">
                                 <label>Username</label>
