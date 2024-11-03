@@ -3,9 +3,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class books extends Model
+class products extends Model
 {
-    protected $table = 'books';
+    protected $table = 'products';
     protected $primaryKey = 'id';
     public $timestamps = True;
     protected $fillable = ['name', 'code','price','amount'];

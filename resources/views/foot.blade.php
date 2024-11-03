@@ -2,7 +2,7 @@
     <div class="col-md-12">
 
       <div class="footer">
-       <p>2023 © Penjualan Buku.</p>
+       <p>2024 © Kasir.</p>
    </div>
 </div>
 </div>

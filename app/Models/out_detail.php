@@ -11,7 +11,7 @@ class out_detail extends Model
     protected $fillable = ['transaction_id', 'book_id','price','amount'];
 
 
-    public function books() {
-        return $this->belongsTo(books::class, 'book_id', 'id');
+    public function products() {
+        return $this->belongsTo(products::class, 'book_id', 'id');
     }
 }

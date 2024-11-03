@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\in_transaction;
 use App\Models\in_detail;
-use App\Models\books;
+use App\Models\products;
 use Illuminate\Support\Facades\DB;
 use App\Exports\InDetailsExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -48,11 +48,11 @@ if (auth::user()->level->level == "guest" ) {
             abort(403, 'Unauthorized action.');
         }
 
-        // retrieve books from database
-    $books = books::all();
+        // retrieve products from database
+    $products = products::all();
 
-        // return view with books data
-    return view('transaction_in.input', ['books' => $books]);
+        // return view with products data
+    return view('transaction_in.input', ['products' => $products]);
 
 
 }
@@ -76,7 +76,7 @@ if (auth::user()->level->level == "guest" ) {
     }
             // dd($request);
 
-    $books = request()->input('Book');
+    $products = request()->input('Book');
     $prices = request()->input('price');
     $amounts = request()->input('amount');
             // dd($prices);
@@ -93,7 +93,7 @@ if (auth::user()->level->level == "guest" ) {
     $transaction->save();
     $trans_id = $transaction->id;
 
-    foreach ($books as $key => $book) {
+    foreach ($products as $key => $book) {
         DB::table('transaction_in_details')->insert([
             'transaction_id'=> $trans_id,
             'book_id' => $book,
@@ -102,7 +102,7 @@ if (auth::user()->level->level == "guest" ) {
         ]);
     }
 
-        // redirect to books list
+        // redirect to products list
     return redirect('/transaction_in');
 
 
@@ -118,7 +118,7 @@ public function delete($id)
 in_detail::where('transaction_id', $id)->delete();
 in_transaction::where('id', $id)->delete();
 
-        // redirect to books list
+        // redirect to products list
 return redirect('/transaction_in');
 
 

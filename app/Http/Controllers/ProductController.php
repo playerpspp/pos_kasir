@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\books;
+use App\Models\products;
 use App\Models\in_transaction;
 use App\Models\in_detail;
 use App\Models\out_transaction;
@@ -18,7 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Dompdf\Dompdf;
 
 
-class BookController extends Controller
+class ProductController extends Controller
 {
    public function __construct()
    {
@@ -34,11 +34,11 @@ class BookController extends Controller
 public function index()
 {
 
-        // retrieve books from database
-    $books = books::all();
+        // retrieve products from database
+    $products = products::all();
 
-        // return view with books data
-    return view('book.books', ['books' => $books]);
+        // return view with products data
+    return view('product.products', ['products' => $products]);
 
 }
 
@@ -48,7 +48,7 @@ public function show()
     abort(403, 'Unauthorized action.');
 }
 
-return view('book.input',);
+return view('product.input',);
 
 }
 
@@ -58,7 +58,7 @@ public function input(Request $request)
     abort(403, 'Unauthorized action.');
 }
 
-        // validate book input
+        // validate product input
     $validate = Validator::make($request->all(), [
         'name' => 'required|max:255',
         'code' => 'required|min:4|max:255',
@@ -67,24 +67,24 @@ public function input(Request $request)
     if ($validate->fails())
     {
         $id= $request->id;
-        return redirect("/books/input")
+        return redirect("/products/input")
         ->withErrors($validate)
         ->withInput();
     }
 
-        // create new book
-    $book = new books();
-    $book->name = $request->input('name');
-    $book->code = $request->input('code');
-    $book->price = $request->input('price');
-    $book->worker_id = auth::user()->worker->id;
-    $book->amount = 0;
+        // create new product
+    $product = new products();
+    $product->name = $request->input('name');
+    $product->code = $request->input('code');
+    $product->price = $request->input('price');
+    $product->worker_id = auth::user()->worker->id;
+    $product->amount = 0;
 
 
-    $book->save();
+    $product->save();
 
-        // redirect to books list
-    return redirect('/books'); 
+        // redirect to products list
+    return redirect('/products'); 
 
 
 }
@@ -97,11 +97,11 @@ public function delete($id)
 }
 
 
-$book = new books();
-books::where('id', $id)->delete();
+$product = new products();
+products::where('id', $id)->delete();
 
-        // redirect to books list
-return redirect('/books');
+        // redirect to products list
+return redirect('/products');
 
 
 
@@ -114,9 +114,9 @@ public function edit($id)
 }
 
 
-$book = books::where('id', $id)->first();
+$product = products::where('id', $id)->first();
 
-return view('book.edit', ['book' => $book]);
+return view('product.edit', ['product' => $product]);
 
 
 }
@@ -136,19 +136,19 @@ public function update(Request $request)
     if ($validate->fails())
     {
         $id= $request->id;
-        return redirect("/books/edit/{$id}")
+        return redirect("/products/edit/{$id}")
         ->withErrors($validate)
         ->withInput();
     }
 
-    $book = books::where('id', $request->id)
+    $product = products::where('id', $request->id)
     ->update([
         'name' => $request->name,
         'code' => $request->code,
         'price' => $request->price,
     ]);
 
-    return redirect('/books');
+    return redirect('/products');
 
 
 }
@@ -191,9 +191,9 @@ public function exportPdf()
     ->get()
     ->keyBy('book_id');
 
-    $books = books::all();
+    $products = products::all();
     $pdf = new Dompdf();
-    $pdf->loadHtml(view('book.tes', compact('books','transIn','transOut','start','end')));
+    $pdf->loadHtml(view('product.tes', compact('products','transIn','transOut','start','end')));
     $pdf->setPaper('A4', 'landscape');
     $pdf->render();
     $pdf->stream("Laporan Buku.pdf", array("Attachment" => false));

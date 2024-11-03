@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\out_transaction;
 use App\Models\out_detail;
-use App\Models\books;
+use App\Models\products;
 use Illuminate\Support\Facades\DB;
 use App\Exports\OutDetailsExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -45,11 +45,11 @@ class transaction_outController extends Controller
         if (auth::user()->level->level == "guest" ) {
             abort(403, 'Unauthorized action.');
         }
-        // retrieve books from database
-        $books = books::all();
+        // retrieve products from database
+        $products = products::all();
 
-        // return view with books data
-        return view('transaction_out.input', ['books' => $books]);
+        // return view with products data
+        return view('transaction_out.input', ['products' => $products]);
 
 
     }
@@ -72,12 +72,12 @@ class transaction_outController extends Controller
             ->withInput();
         }
 
-        $books = request()->input('Book');
+        $products = request()->input('Book');
         $amounts = request()->input('amount');
         $prices = [];
 
-        foreach ($books as $key => $book) {
-            $data= books::where('id', $book)->first();
+        foreach ($products as $key => $book) {
+            $data= products::where('id', $book)->first();
             $prices[$key]=$data->price;
         }
 
@@ -91,7 +91,7 @@ class transaction_outController extends Controller
         $transaction->save();
         $trans_id = $transaction->id;
         
-        foreach ($books as $key => $book) {
+        foreach ($products as $key => $book) {
             DB::table('transaction_out_details')->insert([
                 'transaction_id'=> $trans_id,
                 'book_id' => $book,
@@ -100,7 +100,7 @@ class transaction_outController extends Controller
             ]);
         }
 
-        // redirect to books list
+        // redirect to products list
         return redirect('/transaction_out');
 
 
@@ -118,7 +118,7 @@ class transaction_outController extends Controller
     out_detail::where('transaction_id', $id)->delete();
 
 
-        // redirect to books list
+        // redirect to products list
     return redirect('/transaction_out');
 
 
