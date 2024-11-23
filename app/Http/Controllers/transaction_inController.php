@@ -131,7 +131,7 @@ public function detail($id)
         // $detail = in_detail::where('transaction_id', $id)->get();
     $detail = in_detail::select('product_id', DB::raw('SUM(price * amount) as total_price'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(price) as price'))
     ->where('transaction_id', $id)
-    ->groupBy('product_id')
+    ->groupBy('product_id', 'price')
     ->get();
     $sum = in_detail::select(DB::raw('SUM(price * amount) as total_sum'))
     ->where('transaction_id', $id)

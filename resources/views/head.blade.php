@@ -9,6 +9,7 @@
     <meta name="theme-name" content="focus" />
     <!-- Icon -->
     <link rel="icon" href="/images/favicon.png">
+    <main href="/"></main>
     <!-- Styles -->
     <link href="/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
     <link href="/css/lib/chartist/chartist.min.css" rel="stylesheet">

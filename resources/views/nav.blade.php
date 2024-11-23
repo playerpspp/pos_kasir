@@ -3,7 +3,7 @@
         <div class="nano-content">
             <ul>
                 <div class="logo"><a href="index.html">
-                    <!-- <img src="images/logo.png" alt="" /> --><span>Penjualan Buku</span></a></div>
+                    <!-- <img src="images/logo.png" alt="" /> --><span>Point of Sale</span></a></div>
                     <li class="label">Main</li>
                     <li><a href="/dashboard"><i class="ti-dashboard"></i> Dashboard </a></li>
                     <br>
