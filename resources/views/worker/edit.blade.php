@@ -45,6 +45,16 @@
                                     </div><br>
 
                                     <div class="form-group">
+                                        <label for="department">department:</label><br>
+                                        <select type="text" class="form-control" id="department" name="department" value="{{old('department')}}" required>
+                                        <option value="{{$user->department->id}}">{{$user->department->name}}</option>
+                                            @foreach ($departments as $department)
+                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div><br>
+
+                                    <div class="form-group">
                                         <label>Level</label>
                                         <select id="level" name="level" class="form-control">
                                             <option value="{{$user->level->id}}">{{$user->level->level}}</option>

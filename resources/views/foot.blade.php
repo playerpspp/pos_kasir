@@ -2,7 +2,7 @@
     <div class="col-md-12">
 
       <div class="footer">
-       <p>2024 © Kasir.</p>
+       <p>2024 © Point of Sale.</p>
    </div>
 </div>
 </div>
@@ -46,15 +46,15 @@
 
 
 
-    <script src="/js/lib/data-table/datatables.min.js"></script>
-    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="/js/lib/data-table/buttons.flash.min.js"></script>
-    <script src="/js/lib/data-table/jszip.min.js"></script>
-    <script src="/js/lib/data-table/pdfmake.min.js"></script>
-    <script src="/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="/js/lib/data-table/datatables-init.js"></script>
+    <script src="js/lib/data-table/datatables.min.js"></script>
+    <script src="js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="js/lib/data-table/buttons.flash.min.js"></script>
+    <script src="js/lib/data-table/jszip.min.js"></script>
+    <script src="js/lib/data-table/pdfmake.min.js"></script>
+    <script src="js/lib/data-table/vfs_fonts.js"></script>
+    <script src="js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="js/lib/data-table/buttons.print.min.js"></script>
+    <script src="js/lib/data-table/datatables-init.js"></script>
 
 
 </body>

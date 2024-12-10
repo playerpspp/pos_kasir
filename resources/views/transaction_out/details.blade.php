@@ -3,7 +3,7 @@
 @include('nav')
 
 <head>
-    <title>>Detail product Outcome</title>
+    <title>Detail product Outcome</title>
     <link href="/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     <link href="/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
 </head>
@@ -36,6 +36,7 @@
                                     <th width="10px">no</th>
                                     <th width="1000px">name</th>
                                     <th width="1000px">Amount</th>
+                                    <th width="1000px">Price/amount</th>
                                     <th width="1000px">Price</th>
                                 </tr>
                             </thead>
@@ -50,6 +51,7 @@
                                     <td width="10px">{{$no}}</td>
                                     <td>{{ $detai->products->name }}</td>
                                     <td>{{ $detai->total_amount}}</td>
+                                    <td>{{ $detai->products->price }}</td>
                                     <td>{{ $detai->total_price }}</td>
 
                                 </tr>
@@ -60,6 +62,7 @@
                             </tbody>
                             <tr>
                                 <td>total</td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td>{{$sum}}</td>

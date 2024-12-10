@@ -21,7 +21,7 @@ class DepartmentController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (auth()->user()->level->level == "guest" || auth()->user()->level->level == "pekerja") {
+            if (auth()->user()->level->level != "admin" && auth()->user()->level->level == "head") {
                 abort(403, 'Unauthorized action.');
             }if (!Auth::check() ) {
                 return redirect('/');
@@ -32,10 +32,7 @@ class DepartmentController extends Controller
 
     public function index()
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
 
             $perPage = 10;
         // retrieve users from database
@@ -61,35 +58,22 @@ class DepartmentController extends Controller
             );
         // return view with users data
             return view('department.departments', ['departments' => $departments, 'worker' => $workers]);
-
-        } else {
-            return redirect('/');
-        }
         
     }
 
     public function show()
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
 
 
 
             return view('department.input');
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function input(Request $request)
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
         // validate user input
             $validate = Validator::make($request->all(), [
                 'department' => 'required|max:255',
@@ -119,17 +103,11 @@ class DepartmentController extends Controller
         // redirect to users list
             return redirect('/departments');
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function reset($id)
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
 
             $user = new User();
 
@@ -145,17 +123,11 @@ class DepartmentController extends Controller
             return redirect()->back();
 
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function delete($id)
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
 
             $department = Department::find($id);
             $worker = Worker::where('department_id', $department->id)->first();
@@ -166,17 +138,11 @@ class DepartmentController extends Controller
             return redirect('/departments')->with('success', 'Department deleted successfully');
         // redirect to users list
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function edit($id, $head)
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
 
             $department = Department::with('user')->where('id', $id)->first();
 
@@ -187,17 +153,11 @@ class DepartmentController extends Controller
                 'department' => $department,
             ]);
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function update(Request $request)
     {
-        if (Auth::user()->level->level != "Admin") {
-            abort(403, 'Unauthorized action.');
-        }
-        if (Auth::check()) {
+        
 
 
             $validate = Validator::make($request->all(), [
@@ -241,9 +201,6 @@ class DepartmentController extends Controller
 
             return redirect('/departments');
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function search(Request $request)
@@ -316,32 +273,16 @@ class DepartmentController extends Controller
 
 public function inputMember($id)
 {
-    if (Auth::user()->level->level != "Admin") {
-        abort(403, 'Unauthorized action.');
-    }
-    if (Auth::check()) {
-
         $level = DB::table('levels')->where('level', 'perkerja')->first();
         $department = DB::table('departments')
         ->where('departments.id', $id)
         ->first();
 
         return view('department.members.input', ['level' => $level, 'departments' => $department]);
-
-    } else {
-        return redirect('/');
-    }
 }
 
 public function actInputMember(Request $request)
 {
-    if (Auth::user()->level->level != "Admin") {
-        abort(403, 'Unauthorized action.');
-    }
-    if (Auth::check()) {
-        return redirect('/');
-    }
-
         // validate user input
     $validate = Validator::make($request->all(), [
         'name' => 'required|max:255',
@@ -379,16 +320,12 @@ public function actInputMember(Request $request)
     $work->user_id = $userID;
     $work->NIK = $request->input('NIK');
     $work->number = $request->input('number');
-    $work->department_id= $request->input('department');
+    $work->department_id = $request->input('department');
     $work->save();
 
     $level_id = $request->input('level');
     $level = Level::where('id', $level_id)
     ->first();
-
-    if ($level->level == 'head') {
-            // code...
-    }
 
         // redirect to users list
     return redirect("/departments/members/{$id}");
@@ -400,11 +337,7 @@ public function actInputMember(Request $request)
 
 public function deleteMember($id)
 {
-    if (Auth::check()) {
 
-     if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-        abort(403, 'Unauthorized action.');
-    }
     $work = Worker::where('id', $id)
     ->update([
         'department_id'=>null,
@@ -412,9 +345,6 @@ public function deleteMember($id)
 
     return back();
 
-} else {
-    return redirect('/');
-}
 }
 
 public function memberSearch($id,Request $request)

@@ -30,7 +30,6 @@ class WorkerController extends Controller
     public function index()
     {
 
-        if(auth::user()->level->level == "Admin") {
 
 
         // retrieve users from database
@@ -38,9 +37,6 @@ class WorkerController extends Controller
         // return view with users data
             return view('worker.workers', compact('workers'));
 
-        } else {
-            return redirect('/');
-        }
 
     }
 
@@ -54,7 +50,6 @@ class WorkerController extends Controller
 
     public function actInput(Request $request)
     {
-        if(auth::user()->level->level == "Admin") {
         // validate user input
             $validate = Validator::make($request->all(), [
                 'username' => 'required|max:255',
@@ -64,6 +59,7 @@ class WorkerController extends Controller
                 'number' => 'required|max:16',
                 'level' => 'required',
                 'email' => 'required',
+                'department'=> 'required'
             ]);
             if ($validate->fails())
             {
@@ -73,8 +69,11 @@ class WorkerController extends Controller
                 ->withInput();
             }
 
+            $password = bcrypt(12345);
         // create new user
-            $password = bcrypt($request->password);
+            if ($request->input('password')){
+                $password = bcrypt($request->input('password'));
+            }
             $user = new User();
             $user->name = $request->input('username');
             $user->password = $password;
@@ -87,35 +86,26 @@ class WorkerController extends Controller
             $worker->NIK = $request->input('NIK');
             $worker->number = $request->input('number');
             $worker->user_id = $user->id;
+            $worker->department_id  = $request->input('department');
             $worker->save();
 
 
         // redirect to users list
             return redirect('/workers');
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function edit($id)
     {
-        if(auth::user()->level->level == "Admin") {
-
 
             $user = User::where('id', $id)->first();
             $level = Level::all();
             return view('worker.edit', compact('user','level'));
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function update(Request $request)
     {
-        if(auth::user()->level->level == "Admin") {
-
 
             $validate = Validator::make($request->all(), [
                 'username' => 'required|max:255',
@@ -148,14 +138,10 @@ class WorkerController extends Controller
 
             return redirect('/workers');
 
-        } else {
-            return redirect('/');
-        }
     }
 
     public function delete($id)
     {
-        if(auth::user()->level->level == "Admin") {
 
             $worker = new Worker();
             User::where('id', $id)->delete();
@@ -165,9 +151,6 @@ class WorkerController extends Controller
         // redirect to users list
             return redirect('/workers');
 
-        } else {
-            return redirect('/');
-        }
     }
 
 
