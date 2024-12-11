@@ -28,13 +28,9 @@ class transaction_outController extends Controller
 
     public function index()
     {
-        if (auth::user()->level->level == "guest" ) {
-            abort(403, 'Unauthorized action.');
-        }
-        // retrieve out_transaction from database
         $out_transaction = out_transaction::all();
+        
 
-        // return view with transaction_out data
         return view('transaction_out.Transaction_out', ['out_transactions' => $out_transaction]);
 
         
@@ -42,13 +38,8 @@ class transaction_outController extends Controller
 
     public function show()
     {
-        if (auth::user()->level->level == "guest" ) {
-            abort(403, 'Unauthorized action.');
-        }
-        // retrieve products from database
         $products = products::all();
 
-        // return view with products data
         return view('transaction_out.input', ['products' => $products]);
 
 
@@ -56,11 +47,6 @@ class transaction_outController extends Controller
 
     public function input(Request $request)
     {
-        // dd($request);
-        if (auth::user()->level->level == "guest" ) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $validate = Validator::make($request->all(), [
             'product' => 'required',
             'amount' => 'required|max:10',
@@ -100,7 +86,6 @@ class transaction_outController extends Controller
             ]);
         }
 
-        // redirect to products list
         return redirect('/transaction_out');
 
 
@@ -118,7 +103,6 @@ class transaction_outController extends Controller
     out_detail::where('transaction_id', $id)->delete();
 
 
-        // redirect to products list
     return redirect('/transaction_out');
 
 
@@ -126,11 +110,7 @@ class transaction_outController extends Controller
 
 public function detail($id)
 {
-    if (auth::user()->level->level == "guest" ) {
-        abort(403, 'Unauthorized action.');
-    }
 
-        // $detail = in_detail::where('transaction_id', $id)->get();
     $detail =  out_detail::select('product_id', DB::raw('SUM(price) as total_price'), DB::raw('SUM(amount) as total_amount'))
     ->where('transaction_id', $id)
     ->groupBy('product_id')
@@ -165,7 +145,6 @@ foreach ($details as $detail){
     $totalPrices[$detail->id] = $detail->price * $detail->amount;
 }
 
-        // dd($out_details);
 $pdf = new Dompdf();
 $pdf->loadHtml(view('transaction_out.pdf', compact('details', 'totalPrices','start','end')));
 $pdf->setPaper('A4', 'landscape');

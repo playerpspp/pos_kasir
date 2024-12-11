@@ -30,7 +30,6 @@ class TopicController extends Controller
 
     public function index()
     {
-    // retrieve topics and their usage from database
         if (auth::User()->level->level == 'Admin') {
             $topics = Topic::all();
         } else {
@@ -45,10 +44,8 @@ class TopicController extends Controller
         ->groupBy('topic_id')
         ->get()
         ->keyBy('topic_id');
-            // dd($use);
         
 
-    // return view with topics data
         return view('topic.topic', compact('topics', 'use'));
     }
 
@@ -65,7 +62,6 @@ class TopicController extends Controller
     public function actInput(Request $request)
     {
 
-        // validate topic input
         if(auth::User()->level->level == 'Admin'){
             $validate = Validator::make($request->all(), [
                 'topic' => 'required|max:255',
@@ -85,7 +81,6 @@ class TopicController extends Controller
             ->withInput();
         }
 
-        // create new product
         $topic = new Topic();
         $topic->name = $request->input('topic');
         if(auth::User()->level->level == 'Admin'){
@@ -97,7 +92,6 @@ class TopicController extends Controller
 
         $topic->save();
 
-        // redirect to products list
         return redirect('/topics'); 
 
 
@@ -137,7 +131,6 @@ class TopicController extends Controller
             ->withInput();
         }
 
-        // create new product
         if(auth::User()->level->level == 'Admin'){
             $Topic = Topic::where('id', $request->id)
             ->update([

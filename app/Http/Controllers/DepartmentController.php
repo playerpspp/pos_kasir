@@ -35,7 +35,7 @@ class DepartmentController extends Controller
         
 
             $perPage = 10;
-        // retrieve users from database
+            
             $departments = Department::all();
             $workers = [];
 
@@ -46,7 +46,6 @@ class DepartmentController extends Controller
                 }
             }
 
-            // dd($workers);
 
             $currentPage = LengthAwarePaginator::resolveCurrentPage();
             $departments = new LengthAwarePaginator(
@@ -56,7 +55,6 @@ class DepartmentController extends Controller
                 $currentPage,
                 ['path' => LengthAwarePaginator::resolveCurrentPath()]
             );
-        // return view with users data
             return view('department.departments', ['departments' => $departments, 'worker' => $workers]);
         
     }
@@ -74,7 +72,6 @@ class DepartmentController extends Controller
     public function input(Request $request)
     {
         
-        // validate user input
             $validate = Validator::make($request->all(), [
                 'department' => 'required|max:255',
             ]);
@@ -93,14 +90,9 @@ class DepartmentController extends Controller
 
             $departmentID = $department->id;
 
-            // $work = new Worker();
-            // $work->name = $request->input('name');
-            // $work->user_id = $userID;
-            // $work->department_id= $departmentID;
-            // $work->save();
 
 
-        // redirect to users list
+        
             return redirect('/departments');
 
     }
@@ -119,7 +111,7 @@ class DepartmentController extends Controller
             ]);
 
 
-        // redirect to users list
+        
             return redirect()->back();
 
 
@@ -136,7 +128,6 @@ class DepartmentController extends Controller
             }
             $department->delete();
             return redirect('/departments')->with('success', 'Department deleted successfully');
-        // redirect to users list
 
     }
 
@@ -232,9 +223,6 @@ class DepartmentController extends Controller
 
    public function members($id)
    {
-    if (Auth::user()->level->level != "Admin" && (Auth::user()->level->level != "head")) {
-        abort(403, 'Unauthorized action.');
-    }
     $perPage = 10;
     if($id == 0){
 
@@ -283,7 +271,6 @@ public function inputMember($id)
 
 public function actInputMember(Request $request)
 {
-        // validate user input
     $validate = Validator::make($request->all(), [
         'name' => 'required|max:255',
         'NIK' => 'required|max:15',
@@ -302,7 +289,6 @@ public function actInputMember(Request $request)
         ->withInput();
     }
 
-        // create new user
         $id= $request->input('department');
 
     $password = bcrypt($request->password);
@@ -327,7 +313,7 @@ public function actInputMember(Request $request)
     $level = Level::where('id', $level_id)
     ->first();
 
-        // redirect to users list
+        
     return redirect("/departments/members/{$id}");
 
 

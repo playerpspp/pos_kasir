@@ -29,14 +29,10 @@ class transaction_inController extends Controller
 }
 public function index()
 {
-if (auth::user()->level->level == "guest" ) {
-            abort(403, 'Unauthorized action.');
-        }
 
-        // retrieve in_transaction from database
+
     $in_transaction = in_transaction::all();
 
-        // return view with transaction_in data
     return view('transaction_in.Transaction_in', ['in_transactions' => $in_transaction]);
 
     
@@ -44,14 +40,9 @@ if (auth::user()->level->level == "guest" ) {
 
 public function show()
 {
-if (auth::user()->level->level == "guest" ) {
-            abort(403, 'Unauthorized action.');
-        }
 
-        // retrieve products from database
     $products = products::all();
 
-        // return view with products data
     return view('transaction_in.input', ['products' => $products]);
 
 
@@ -59,10 +50,6 @@ if (auth::user()->level->level == "guest" ) {
 
 public function input(Request $request)
 {
-if (auth::user()->level->level == "guest" ) {
-            abort(403, 'Unauthorized action.');
-        }
-        // validate product input
     $validate = Validator::make($request->all(), [
         'product' => 'required|max:255',
         'price' => 'required|max:10',
@@ -74,12 +61,10 @@ if (auth::user()->level->level == "guest" ) {
         ->withErrors($validate)
         ->withInput();
     }
-            // dd($request);
 
     $products = request()->input('product');
     $prices = request()->input('price');
     $amounts = request()->input('amount');
-            // dd($prices);
 
     $totalPrices = 0;
     for($i = 0; $i < count($prices); $i++) {
@@ -102,7 +87,6 @@ if (auth::user()->level->level == "guest" ) {
         ]);
     }
 
-        // redirect to products list
     return redirect('/transaction_in');
 
 
@@ -111,14 +95,13 @@ if (auth::user()->level->level == "guest" ) {
 
 public function delete($id)
 {
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
+   if (Auth::user()->level->level == "admin" && Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 
 in_detail::where('transaction_id', $id)->delete();
 in_transaction::where('id', $id)->delete();
 
-        // redirect to products list
 return redirect('/transaction_in');
 
 
@@ -128,7 +111,6 @@ public function detail($id)
 {
 
 
-        // $detail = in_detail::where('transaction_id', $id)->get();
     $detail = in_detail::select('product_id', DB::raw('SUM(price * amount) as total_price'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(price) as price'))
     ->where('transaction_id', $id)
     ->groupBy('product_id', 'price')
@@ -144,10 +126,9 @@ public function detail($id)
 
 public function exportPdf(Request $request)
 {
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
+   if (Auth::user()->level->level == "admin" && Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
-        // dd($request);
 $start = request()->input('start_date');
 $end = request()->input('end_date');
 $transactionIDs = in_transaction::where('created_at','>=',$start)
@@ -170,7 +151,7 @@ $pdf->stream("Laporan Pemasukan.pdf", array("Attachment" => false));
 
 public function exportExcel(Request $request)
 {
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
+   if (Auth::user()->level->level == "admin" && Auth::user()->level->level == "head") {
     abort(403, 'Unauthorized action.');
 }
 $start = $request->input('start_date');

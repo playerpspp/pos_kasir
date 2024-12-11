@@ -30,19 +30,12 @@ class WorkerController extends Controller
     public function index()
     {
 
-
-
-        // retrieve users from database
-           $workers = Worker::with('user','department')->get();
-        // return view with users data
-            return view('worker.workers', compact('workers'));
-
-
+        $workers = Worker::with('user','department')->get();
+        return view('worker.workers', compact('workers'));
     }
 
     public function input()
     {
-        // dd(auth::user());
         $level = Level::all();
         $departments = Department::All();
         return view('worker.input', compact('level','departments'));
@@ -50,7 +43,6 @@ class WorkerController extends Controller
 
     public function actInput(Request $request)
     {
-        // validate user input
             $validate = Validator::make($request->all(), [
                 'username' => 'required|max:255',
                 'name' => 'required|max:255',
@@ -70,7 +62,6 @@ class WorkerController extends Controller
             }
 
             $password = bcrypt(12345);
-        // create new user
             if ($request->input('password')){
                 $password = bcrypt($request->input('password'));
             }
@@ -90,7 +81,6 @@ class WorkerController extends Controller
             $worker->save();
 
 
-        // redirect to users list
             return redirect('/workers');
 
     }
@@ -148,7 +138,6 @@ class WorkerController extends Controller
             $user = new User();
             User::where('id', $id)->delete();
 
-        // redirect to users list
             return redirect('/workers');
 
     }

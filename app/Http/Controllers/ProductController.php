@@ -24,6 +24,9 @@ class ProductController extends Controller
    {
     $this->middleware('auth');
     $this->middleware(function ($request, $next) {
+    if (Auth::user()->level->level == "admin" && Auth::user()->level->level == "head") {
+        abort(403, 'Unauthorized action.');
+    }
      if (!Auth::check() ) {
         return redirect('/');
     }
@@ -34,19 +37,14 @@ class ProductController extends Controller
 public function index()
 {
 
-        // retrieve products from database
     $products = products::all();
 
-        // return view with products data
     return view('product.products', ['products' => $products]);
 
 }
 
 public function show()
 {
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
 
 return view('product.input',);
 
@@ -54,11 +52,7 @@ return view('product.input',);
 
 public function input(Request $request)
 {
-    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
 
-        // validate product input
     $validate = Validator::make($request->all(), [
         'name' => 'required|max:255',
         'code' => 'required|min:4|max:255',
@@ -72,7 +66,6 @@ public function input(Request $request)
         ->withInput();
     }
 
-        // create new product
     $product = new products();
     $product->name = $request->input('name');
     $product->code = $request->input('code');
@@ -83,7 +76,6 @@ public function input(Request $request)
 
     $product->save();
 
-        // redirect to products list
     return redirect('/products'); 
 
 
@@ -92,15 +84,9 @@ public function input(Request $request)
 public function delete($id)
 {
 
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
-
-
 $product = new products();
 products::where('id', $id)->delete();
 
-        // redirect to products list
 return redirect('/products');
 
 
@@ -109,10 +95,6 @@ return redirect('/products');
 
 public function edit($id)
 {
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
-
 
 $product = products::where('id', $id)->first();
 
@@ -123,11 +105,7 @@ return view('product.edit', ['product' => $product]);
 
 public function update(Request $request)
 {
-    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
-
-
+    
     $validate = Validator::make($request->all(), [
        'name' => 'required|max:255',
        'code' => 'required|min:4|max:255',
@@ -155,10 +133,7 @@ public function update(Request $request)
 
 public function exportPdf()
 {
-    if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
-
+    
     $start = request()->input('start_date');
     $end = request()->input('end_date');
 
@@ -201,10 +176,7 @@ public function exportPdf()
 
 public function exportExcel()
 {
-   if (Auth::user()->level->level == "admin" || Auth::user()->level->level == "head") {
-    abort(403, 'Unauthorized action.');
-}
-
+   
 return Excel::download(new ProductsExport, 'Laporan Buku.xlsx');
 }
 

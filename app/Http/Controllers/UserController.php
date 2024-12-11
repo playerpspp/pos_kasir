@@ -21,11 +21,7 @@ class UserController extends Controller
 
         if(auth::user()->level->level == "Admin") {
 
-
-        // retrieve users from database
             $users = User::all();
-
-        // return view with users data
             return view('user.users', ['users' => $users]);
 
         } else {
@@ -36,7 +32,6 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        // dd(auth::user());
         return view('dashboard');
     }
 
@@ -50,11 +45,9 @@ class UserController extends Controller
         $credentials = $request->only('name', 'password');
 
         if (Auth::attempt($credentials)) {
-        // if the login is successful
             $user = Auth::user();
             return redirect()->intended('/dashboard');
         } else {
-        // if the login is not successful
          return back()->withInput()->withErrors(['name' => 'Invalid Name or Password']);
 
      }
@@ -71,15 +64,13 @@ class UserController extends Controller
 
  public function input()
  {
-        // dd(auth::user());
     $level = Level::all();
     return view('user.input', compact('level'));
 }
 
 public function actInput(Request $request)
 {
-    if(auth::user()->level->level == "Admin") {
-        // validate user input
+
         $validate = Validator::make($request->all(), [
             'username' => 'required|max:255',
             'level' => 'required',
@@ -93,7 +84,6 @@ public function actInput(Request $request)
             ->withInput();
         }
 
-        // create new user
         $pass=12345;
         $password = bcrypt($pass);
         $user = new User();
@@ -103,74 +93,8 @@ public function actInput(Request $request)
         $user->level_id= $request->input('level');
         $user->save();
 
-        // redirect to users list
         return redirect('/users');
 
-    } else {
-        return redirect('/');
-    }
-}
-
-public function edit($id)
-{
-    if(auth::user()->level->level == "Admin") {
-
-
-        $user = User::where('id', $id)->first();
-        $level = Level::all();
-        return view('user.edit', compact('user','level'));
-        
-    } else {
-        return redirect('/');
-    }
-}
-
-public function update(Request $request)
-{
-    if(auth::user()->level->level == "Admin") {
-
-
-        $validate = Validator::make($request->all(), [
-            'username' => 'required|max:255',
-            'level' => 'required',
-            'email' => 'required',
-        ]);
-        if ($validate->fails())
-        {
-            $id= $request->id;
-            return redirect("/users/edit/". $request->id)
-            ->withErrors($validate)
-            ->withInput();
-        }
-
-        $user = User::where('id', $request->id)
-        ->update([
-            'name' => $request->username,
-            'level_id' => $request->level,
-            'email' => $request->email,
-        ]);
-        return redirect('/users');
-        
-    } else {
-        return redirect('/');
-    }
-}
-
-public function delete($id)
-{
-    if(auth::user()->level->level == "Admin") {
-
-        $worker = new Worker();
-        User::where('id', $id)->delete();
-        $user = new User();
-        User::where('id', $id)->delete();
-
-        // redirect to users list
-        return redirect('/users');
-        
-    } else {
-        return redirect('/');
-    }
 }
 
 
@@ -193,7 +117,6 @@ public function password()
 public function actProfile(Request $request)
 {
     $id = Auth::user()->id;
-    // $oldPhoto = Auth::user()->photo;
 
     $validate = Validator::make($request->all(), [
         'username' => 'required',
@@ -207,25 +130,10 @@ public function actProfile(Request $request)
         ->withInput();
     }
     
-
-    // $photo = $request->file('photo');
-
-    // if(isset($photo) ){
-
-    //     $extension = $photo->getClientOriginalExtension();
-    //     $filename = Str::random(20) . '.' . $extension;
-
-    //     $path = $photo->storeAs('public/images/avatar', $filename);
-
-    //     if (!empty($oldPhoto)) {
-    //         Storage::delete('public/images/avatar/' . $oldPhoto);
-    //     }
-    // }
     $user = User::where('id', $id)
     ->update([
         'name' => $request->input('username'),
         'email' => $request->input('email'),
-        // 'photo' => $filename,
     ]);
     
 
@@ -235,7 +143,6 @@ public function actProfile(Request $request)
 public function actPassword(Request $request)
 {
     $id = Auth::user()->id;
-
 
     $validate = Validator::make($request->all(), [
         'password' => 'required|max:255|min:4|confirmed',
