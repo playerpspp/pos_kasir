@@ -49,8 +49,8 @@
                                     <td>{{ $product->code }}</td>
                                     <td>{{ $product->amount }}</td>
                                     <td>{{ $product->price }}</td>
-                                    @if(isset($transaction->worker->name))
-                                    <td>{{ $transaction->worker->name }}</td>
+                                    @if(isset($product->worker->name))
+                                    <td>{{ $product->worker->name }}</td>
                                     @else
                                     <td>unknown</td>
                                     @endif

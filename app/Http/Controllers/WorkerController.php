@@ -104,6 +104,7 @@ class WorkerController extends Controller
                 'number' => 'required|max:10',
                 'level' => 'required',
                 'email' => 'required',
+                'department'=>'required'
             ]);
             if ($validate->fails())
             {
@@ -124,6 +125,7 @@ class WorkerController extends Controller
                 'name' => $request->name,
                 'NIK' => $request->NIK,
                 'number' => $request->number,
+                'department_id' => $request->department
             ]);
 
             return redirect('/workers');
@@ -133,8 +135,8 @@ class WorkerController extends Controller
     public function delete($id)
     {
 
-            $worker = new Worker();
-            User::where('id', $id)->delete();
+            // $worker = new Worker();
+            // User::where('id', $id)->delete();
             $user = new User();
             User::where('id', $id)->delete();
 

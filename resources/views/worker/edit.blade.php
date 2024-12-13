@@ -41,7 +41,7 @@
 
                                     <div class="form-group">
                                         <label for="number">Phone number:</label><br>
-                                        <input type="text" class="form-control" id="number" name="number" placeholder=" number" value="{{$user->worker->number}}" required >
+                                        <input type="tel" class="form-control" id="number" name="number" placeholder=" number" value="{{$user->worker->number}}" required >
                                     </div><br>
 
                                     <div class="form-group">

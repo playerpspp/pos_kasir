@@ -40,7 +40,7 @@
 
                                     <div class="form-group">
                                         <label for="number">Phone number:</label><br>
-                                        <input type="text" class="form-control" id="number" name="number" placeholder=" number" value="{{old('number')}}" required >
+                                        <input type="tel" class="form-control" id="number" name="number" placeholder=" number" value="{{old('number')}}" required >
                                     </div><br>
 
                                     <input type="hidden" id="department" name="department" value="{{$departments->id}}" >
