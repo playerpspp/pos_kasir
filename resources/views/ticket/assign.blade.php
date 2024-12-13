@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-10">
                     <a onclick="history.back()"><button class="btn btn-primary">
-                        Back
+                        <i class="ti-arrow-left"></i>
                     </button></a>
                     <div class="card">
                         <div class="card-title">    

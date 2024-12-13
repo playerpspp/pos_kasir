@@ -16,7 +16,7 @@
 
                 <div class="col-lg-12">
                     <a onclick="history.back()"><button class="btn btn-primary">
-                        Back
+                        <i class="ti-arrow-left"></i>
                     </button></a>  
 
                     <h3>Income Form</h3>
