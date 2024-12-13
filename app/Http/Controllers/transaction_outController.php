@@ -68,8 +68,8 @@ class transaction_outController extends Controller
         }
 
         $totalPrices = 0;
-        for($i = 0; $i < count($prices); $i++) {
-            $totalPrices += $prices[$i] * $amounts[$i];
+        foreach ($products as $key => $product) {
+            $totalPrices += $prices[$key] * $amounts[$key];
         }
         $transaction = new out_transaction;
         $transaction->price = $totalPrices;
@@ -111,7 +111,7 @@ class transaction_outController extends Controller
 public function detail($id)
 {
 
-    $detail =  out_detail::select('product_id', DB::raw('SUM(price) as total_price'), DB::raw('SUM(amount) as total_amount'))
+    $detail =  out_detail::select('product_id', DB::raw('SUM(price * amount) as total_price'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(price) as price'))
     ->where('transaction_id', $id)
     ->groupBy('product_id')
     ->get();
