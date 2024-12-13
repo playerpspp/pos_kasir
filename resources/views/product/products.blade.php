@@ -56,7 +56,7 @@
                                     @endif
                                     <td>
                                         @if(auth::user()->level->level != "pekerja")
-                                       <a href="/products/edit/{{$product->id}}"><button class="btn btn-warning" title="Detail"><i class="ti-pencil-alt"></i></button></a>
+                                       <a href="/products/edit/{{$product->id}}"><button class="btn btn-warning" title="Edit"><i class="ti-pencil-alt"></i></button></a>
 
                                        <a href="/products/actdelete/{{$product->id}}"><button class="btn btn-danger" title="Delete"><i class="ti-trash"></i></button></a>
                                        @endif

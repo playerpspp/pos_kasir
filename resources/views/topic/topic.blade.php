@@ -51,7 +51,7 @@
                                     <td>0</td>
                                     @endif
                                     <td>
-                                       <a href="/topics/edit/{{$topic->id}}"><button class="btn btn-warning" title="Detail"><i class="ti-pencil-alt"></i></button></a>
+                                       <a href="/topics/edit/{{$topic->id}}"><button class="btn btn-warning" title="Edit"><i class="ti-pencil-alt"></i></button></a>
                                    </td>
                                </tr>
                                @php
