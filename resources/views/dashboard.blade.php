@@ -16,14 +16,14 @@
             <br>
             <div class="card-body">
                 @if (auth::user()->level->level != 'guest' && auth::user()->level->level != 'pekerja')
-                <a href="/products/input" class="btn btn-warning btn-box">Mendata Buku baru</a>
+                <a href="/products/input" class="btn btn-warning btn-box">Mendata product baru</a>
                 @endif
             </div>
             <br>
             <div class="card-body">
                 @if (auth::user()->level->level != 'guest' )
-                <a href="/transaction_in/input" class="btn btn-primary btn-box">Mendata Pemasukan Buku</a>
-                <a href="/transaction_out/input" class="btn btn-success btn-box">Mendata Penjualan Buku</a>
+                <a href="/transaction_in/input" class="btn btn-primary btn-box">Mendata Pemasukan product</a>
+                <a href="/transaction_out/input" class="btn btn-success btn-box">Mendata Penjualan product</a>
                 @endif
 
                 

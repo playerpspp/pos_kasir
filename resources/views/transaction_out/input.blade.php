@@ -33,7 +33,7 @@
                                 <!-- First input group (existing one) -->
                                 <div class="custom-card">
                                     <div class="custom-form-group">
-                                        <label for="product">Buku:</label><br>
+                                        <label for="product">Product:</label><br>
                                         <select required class="form-control" id="product" name="product[]" required>
                                             <option>Choose product</option>
                                             @foreach ($products as $product)
@@ -72,7 +72,7 @@
         // Create the HTML structure for the new input fields
         newInputGroup.innerHTML = `
             <div class="custom-form-group">
-                <label for="product">Buku:</label><br>
+                <label for="product">Product:</label><br>
                 <select required class="form-control" name="product[]" required>
                     <option>Choose product</option>
                     @foreach ($products as $product)

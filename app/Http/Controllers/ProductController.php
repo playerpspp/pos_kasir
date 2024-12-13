@@ -171,13 +171,13 @@ public function exportPdf()
     $pdf->loadHtml(view('product.tes', compact('products','transIn','transOut','start','end')));
     $pdf->setPaper('A4', 'landscape');
     $pdf->render();
-    $pdf->stream("Laporan Buku.pdf", array("Attachment" => false));
+    $pdf->stream("Laporan Product.pdf", array("Attachment" => false));
 }
 
 public function exportExcel()
 {
    
-return Excel::download(new ProductsExport, 'Laporan Buku.xlsx');
+return Excel::download(new ProductsExport, 'Laporan Product.xlsx');
 }
 
 

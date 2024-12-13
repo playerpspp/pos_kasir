@@ -90,7 +90,8 @@ class WorkerController extends Controller
 
             $user = User::where('id', $id)->first();
             $level = Level::all();
-            return view('worker.edit', compact('user','level'));
+            $departments = Department::All();
+            return view('worker.edit', compact('user','level','departments'));
 
     }
 
