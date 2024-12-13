@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 13 Des 2024 pada 13.16
+-- Waktu pembuatan: 13 Des 2024 pada 16.39
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `departments`
 --
 
-DROP TABLE IF EXISTS `departments`;
 CREATE TABLE `departments` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -50,7 +49,6 @@ INSERT INTO `departments` (`id`, `name`, `head_id`, `created_at`, `updated_at`) 
 -- Struktur dari tabel `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
   `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -67,7 +65,6 @@ CREATE TABLE `failed_jobs` (
 -- Struktur dari tabel `levels`
 --
 
-DROP TABLE IF EXISTS `levels`;
 CREATE TABLE `levels` (
   `id` int NOT NULL,
   `level` varchar(50) NOT NULL
@@ -88,7 +85,6 @@ INSERT INTO `levels` (`id`, `level`) VALUES
 -- Struktur dari tabel `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -117,7 +113,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Struktur dari tabel `password_resets`
 --
 
-DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -130,7 +125,6 @@ CREATE TABLE `password_resets` (
 -- Struktur dari tabel `personal_access_tokens`
 --
 
-DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
   `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -150,7 +144,6 @@ CREATE TABLE `personal_access_tokens` (
 -- Struktur dari tabel `priorities`
 --
 
-DROP TABLE IF EXISTS `priorities`;
 CREATE TABLE `priorities` (
   `id` bigint UNSIGNED NOT NULL,
   `priority` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -173,7 +166,6 @@ INSERT INTO `priorities` (`id`, `priority`, `created_at`, `updated_at`) VALUES
 -- Struktur dari tabel `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -202,7 +194,6 @@ INSERT INTO `products` (`id`, `name`, `code`, `price`, `amount`, `worker_id`, `c
 -- Struktur dari tabel `tickets`
 --
 
-DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
@@ -236,7 +227,6 @@ INSERT INTO `tickets` (`id`, `user_id`, `department_id`, `topic_id`, `priority_i
 -- Struktur dari tabel `ticket_details`
 --
 
-DROP TABLE IF EXISTS `ticket_details`;
 CREATE TABLE `ticket_details` (
   `id` bigint UNSIGNED NOT NULL,
   `ticket_id` bigint UNSIGNED NOT NULL,
@@ -262,7 +252,6 @@ INSERT INTO `ticket_details` (`id`, `ticket_id`, `date`, `chat`, `user_id`, `pho
 -- Struktur dari tabel `topics`
 --
 
-DROP TABLE IF EXISTS `topics`;
 CREATE TABLE `topics` (
   `id` bigint UNSIGNED NOT NULL,
   `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -285,7 +274,6 @@ INSERT INTO `topics` (`id`, `name`, `department_id`, `created_at`, `updated_at`)
 -- Struktur dari tabel `transaction_in`
 --
 
-DROP TABLE IF EXISTS `transaction_in`;
 CREATE TABLE `transaction_in` (
   `id` bigint UNSIGNED NOT NULL,
   `price` int NOT NULL,
@@ -310,7 +298,6 @@ INSERT INTO `transaction_in` (`id`, `price`, `worker_id`, `created_at`, `updated
 -- Struktur dari tabel `transaction_in_details`
 --
 
-DROP TABLE IF EXISTS `transaction_in_details`;
 CREATE TABLE `transaction_in_details` (
   `id` bigint UNSIGNED NOT NULL,
   `transaction_id` bigint UNSIGNED DEFAULT NULL,
@@ -341,16 +328,14 @@ INSERT INTO `transaction_in_details` (`id`, `transaction_id`, `product_id`, `pri
 --
 -- Trigger `transaction_in_details`
 --
-DROP TRIGGER IF EXISTS `transaction_in_delete`;
 DELIMITER $$
 CREATE TRIGGER `transaction_in_delete` BEFORE DELETE ON `transaction_in_details` FOR EACH ROW BEGIN
   UPDATE products
-  SET amount = amount + OLD.amount  
+  SET amount = amount - OLD.amount  
   WHERE id = OLD.product_id;          
 END
 $$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `transaction_in_insert`;
 DELIMITER $$
 CREATE TRIGGER `transaction_in_insert` AFTER INSERT ON `transaction_in_details` FOR EACH ROW BEGIN
   UPDATE products
@@ -366,7 +351,6 @@ DELIMITER ;
 -- Struktur dari tabel `transaction_out`
 --
 
-DROP TABLE IF EXISTS `transaction_out`;
 CREATE TABLE `transaction_out` (
   `id` bigint UNSIGNED NOT NULL,
   `price` int NOT NULL,
@@ -388,7 +372,6 @@ INSERT INTO `transaction_out` (`id`, `price`, `worker_id`, `created_at`, `update
 -- Struktur dari tabel `transaction_out_details`
 --
 
-DROP TABLE IF EXISTS `transaction_out_details`;
 CREATE TABLE `transaction_out_details` (
   `id` bigint UNSIGNED NOT NULL,
   `transaction_id` bigint UNSIGNED NOT NULL,
@@ -411,16 +394,14 @@ INSERT INTO `transaction_out_details` (`id`, `transaction_id`, `product_id`, `pr
 --
 -- Trigger `transaction_out_details`
 --
-DROP TRIGGER IF EXISTS `transaction_out_delete`;
 DELIMITER $$
 CREATE TRIGGER `transaction_out_delete` BEFORE DELETE ON `transaction_out_details` FOR EACH ROW BEGIN
   UPDATE products
-  SET amount = amount - OLD.amount  
+  SET amount = amount + OLD.amount  
   WHERE id = OLD.product_id;          
 END
 $$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `transaction_out_insert`;
 DELIMITER $$
 CREATE TRIGGER `transaction_out_insert` AFTER INSERT ON `transaction_out_details` FOR EACH ROW BEGIN
   UPDATE products
@@ -436,7 +417,6 @@ DELIMITER ;
 -- Struktur dari tabel `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -463,7 +443,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `level_id`, `photo`, `re
 (11, 'dasda', 'dassda@jmail.com', '$2y$10$HAKyPpH2xOXl8OkugSqeyeGcE6pKXMs8F4Cg6GMfsU6TAecUsZHVC', 3, NULL, NULL, '2024-12-10 12:05:35', '2024-12-10 12:05:35'),
 (12, 'dada', 'dada@jmail.com', '$2y$10$yO.ZcL4tqhLjr.Ueclz5ZOa7/oWo5MrdizybNylNHWUOzcBf.p/JW', 3, NULL, NULL, '2024-12-12 12:14:17', '2024-12-12 12:14:17'),
 (13, 'Mario', 'mario@jmail.com', '$2y$10$Hy/mkLZ6y0TAuROJhA/3y.eD29d6XbIAxE/4cjkAT3Ju6qCMLwb.i', 3, NULL, NULL, '2024-12-13 11:29:10', '2024-12-13 11:29:10'),
-(14, 'nelson', 'nelson@jmail.com', '$2y$10$jQApqoJ/5eCYQusjztkzwu0FL/GY0CcxuoQRvtmwgssP7/PlUZj02', 3, NULL, NULL, '2024-12-13 11:30:02', '2024-12-13 11:30:02');
+(14, 'nelson', 'nelson@jmail.com', '$2y$10$jQApqoJ/5eCYQusjztkzwu0FL/GY0CcxuoQRvtmwgssP7/PlUZj02', 3, NULL, NULL, '2024-12-13 11:30:02', '2024-12-13 11:30:02'),
+(15, 'tera', 'tera@gmail.com', '$2y$10$jp/QEJQLOJtPSGlf3o6P8O9/eBGLrzCRXDRL.fUwi9iWve9JUzhpu', 2, NULL, NULL, '2024-12-13 13:40:42', '2024-12-13 13:40:42'),
+(16, 'tera', 'teras@gmail.com', '$2y$10$OgQU7gUN3FzcBm5pZ9FUne3dL6m7/7LHlm85zQU8Bs0R.jRXqXNrW', 2, NULL, NULL, '2024-12-13 13:41:11', '2024-12-13 13:41:11');
 
 -- --------------------------------------------------------
 
@@ -471,7 +453,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `level_id`, `photo`, `re
 -- Struktur dari tabel `workers`
 --
 
-DROP TABLE IF EXISTS `workers`;
 CREATE TABLE `workers` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -497,7 +478,8 @@ INSERT INTO `workers` (`id`, `name`, `NIK`, `number`, `user_id`, `department_id`
 (8, 'dasda', '342423', '424523423', 11, 6, '2024-12-10 12:05:35', '2024-12-10 12:05:35'),
 (9, 'Hatake', '24234234', '63535347', 12, 6, '2024-12-12 12:14:17', '2024-12-12 12:14:17'),
 (10, 'Mario', '534534534', '6345634', 13, 6, '2024-12-13 11:29:10', '2024-12-13 11:29:10'),
-(11, 'Nelson', '67456745645', '7474566745', 14, 6, '2024-12-13 11:30:02', '2024-12-13 11:30:02');
+(11, 'Nelson', '67456745645', '7474566745', 14, 6, '2024-12-13 11:30:02', '2024-12-13 11:30:02'),
+(12, 'tera', '34', '423423', 16, 5, '2024-12-13 13:41:11', '2024-12-13 13:41:11');
 
 --
 -- Indexes for dumped tables
@@ -720,13 +702,13 @@ ALTER TABLE `transaction_out_details`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `workers`
 --
 ALTER TABLE `workers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
