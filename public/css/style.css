@@ -4315,6 +4315,20 @@ h6.h1 {
     background-color: #dc3545;
     color: #ffffff;
 }
+
+#alert-box {
+    background-color: #f8d7da; /* Light red background for error */
+    color: #721c24;           /* Dark red text for contrast */
+    border: 1px solid #f5c6cb; /* Border matching the background */
+    padding: 10px 15px;       /* Padding for better readability */
+    border-radius: 5px;       /* Rounded corners */
+    margin-bottom: 10px;      /* Spacing between multiple alerts */
+    font-family: Arial, sans-serif;
+    font-size: 14px;          /* Adjust font size for readability */
+    display: inline-block;    /* Align the box neatly */
+    width: calc(100% - 30px); /* Ensure it fits inside containers */
+}
+
 /*
 /* Version: 1.0
 */
