@@ -36,12 +36,12 @@
 
                                     <div class="form-group">
                                         <label for="id_number">NIK:</label><br>
-                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" pattern="\d*" value="{{$user->worker->NIK}}"  required >
+                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK"  pattern="^[0-9]+$" title="Only numbers are allowed" value="{{$user->worker->NIK}}"  required >
                                     </div><br>
 
                                     <div class="form-group">
                                         <label for="number">Phone number:</label><br>
-                                        <input type="tel" class="form-control" id="number" name="number" placeholder=" number" value="{{$user->worker->number}}" required >
+                                        <input type="tel" class="form-control" id="number" name="number" placeholder=" number"  pattern="^[0-9]+$" title="Only numbers are allowed" value="{{$user->worker->number}}" required >
                                     </div><br>
 
                                     <div class="form-group">
@@ -57,10 +57,14 @@
                                     <div class="form-group">
                                         <label>Level</label>
                                         <select id="level" name="level" class="form-control">
+                                        @if ($user->level->level != "head")
                                             <option value="{{$user->level->id}}">{{$user->level->level}}</option>
-                                            @foreach($level as $level)
-                                            <option value="{{$level->id}}">{{$level->level}}</option>
-                                            @endforeach
+                                        @endif
+                                        @foreach($level as $level)
+                                            @if ($level->level != "head")
+                                                 <option value="{{$level->id}}">{{$level->level}}</option>
+                                            @endif
+                                        @endforeach
                                         </select>
                                     </div><br>
 

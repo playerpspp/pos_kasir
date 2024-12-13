@@ -33,12 +33,12 @@
 
                                     <div class="form-group">
                                         <label for="id_number">NIK:</label><br>
-                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" pattern="\d*" value="{{old('NIK')}}"  required >
+                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" value="{{ old('NIK') }}" required pattern="^[0-9]+$" title="Only numbers are allowed">
                                     </div><br>
 
                                     <div class="form-group">
                                         <label for="number">Phone number:</label><br>
-                                        <input type="tel" class="form-control" id="number" name="number" placeholder=" number" value="{{old('number')}}" required >
+                                        <input type="tel" class="form-control" id="number" name="number" placeholder="number" pattern="^[0-9]+$" title="Only numbers are allowed" value="{{old('number')}}" required >
                                     </div><br>
 
                                     <div class="form-group">
@@ -66,7 +66,9 @@
                                         <select required id="level" name="level" class="form-control">
                                             <option>-</option>
                                             @foreach($level as $level)
-                                            <option value="{{$level->id}}">{{$level->level}}</option>
+                                                @if ($level->level != "head")
+                                                 <option value="{{$level->id}}">{{$level->level}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>

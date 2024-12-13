@@ -50,7 +50,7 @@ class WorkerController extends Controller
                 'NIK' => 'required|max:15',
                 'number' => 'required|max:16',
                 'level' => 'required',
-                'email' => 'required',
+                'email' => 'required|unique:users,email',
                 'department'=> 'required'
             ]);
             if ($validate->fails())
@@ -60,12 +60,12 @@ class WorkerController extends Controller
                 ->withErrors($validate)
                 ->withInput();
             }
+            $user = new User();
 
             $password = bcrypt(12345);
             if ($request->input('password')){
                 $password = bcrypt($request->input('password'));
             }
-            $user = new User();
             $user->name = $request->input('username');
             $user->password = $password;
             $user->email = $request->input('email');
@@ -103,7 +103,6 @@ class WorkerController extends Controller
                 'NIK' => 'required|max:15',
                 'number' => 'required|max:10',
                 'level' => 'required',
-                'email' => 'required',
                 'department'=>'required'
             ]);
             if ($validate->fails())
@@ -118,7 +117,6 @@ class WorkerController extends Controller
             ->update([
                 'name' => $request->username,
                 'level_id' => $request->level,
-                'email' => $request->email,
             ]);
             $worker = Worker::where('user_id', $request->id)
             ->update([

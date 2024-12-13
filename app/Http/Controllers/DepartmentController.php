@@ -279,7 +279,7 @@ public function actInputMember(Request $request)
         'username' => 'required|max:255',
         'password' => 'required|min:4',
         'level' => 'required',
-        'email' => 'required',
+        'email' => 'required||unique:users,email',
     ]);
     if ($validate->fails())
     {
