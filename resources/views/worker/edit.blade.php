@@ -36,7 +36,7 @@
 
                                     <div class="form-group">
                                         <label for="id_number">NIK:</label><br>
-                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" value="{{$user->worker->NIK}}"  required >
+                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" pattern="\d*" value="{{$user->worker->NIK}}"  required >
                                     </div><br>
 
                                     <div class="form-group">

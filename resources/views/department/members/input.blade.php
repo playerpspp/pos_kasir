@@ -35,7 +35,7 @@
 
                                     <div class="form-group">
                                         <label for="id_number">NIK:</label><br>
-                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" value="{{old('NIK')}}"  required >
+                                        <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" pattern="\d*" value="{{old('NIK')}}"  required >
                                     </div><br>
 
                                     <div class="form-group">
