@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 10 Des 2024 pada 13.07
+-- Waktu pembuatan: 13 Des 2024 pada 13.16
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `departments`
 --
 
+DROP TABLE IF EXISTS `departments`;
 CREATE TABLE `departments` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -49,6 +50,7 @@ INSERT INTO `departments` (`id`, `name`, `head_id`, `created_at`, `updated_at`) 
 -- Struktur dari tabel `failed_jobs`
 --
 
+DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
   `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -65,6 +67,7 @@ CREATE TABLE `failed_jobs` (
 -- Struktur dari tabel `levels`
 --
 
+DROP TABLE IF EXISTS `levels`;
 CREATE TABLE `levels` (
   `id` int NOT NULL,
   `level` varchar(50) NOT NULL
@@ -85,6 +88,7 @@ INSERT INTO `levels` (`id`, `level`) VALUES
 -- Struktur dari tabel `migrations`
 --
 
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -113,6 +117,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Struktur dari tabel `password_resets`
 --
 
+DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -125,6 +130,7 @@ CREATE TABLE `password_resets` (
 -- Struktur dari tabel `personal_access_tokens`
 --
 
+DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
   `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -144,6 +150,7 @@ CREATE TABLE `personal_access_tokens` (
 -- Struktur dari tabel `priorities`
 --
 
+DROP TABLE IF EXISTS `priorities`;
 CREATE TABLE `priorities` (
   `id` bigint UNSIGNED NOT NULL,
   `priority` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -166,6 +173,7 @@ INSERT INTO `priorities` (`id`, `priority`, `created_at`, `updated_at`) VALUES
 -- Struktur dari tabel `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -182,11 +190,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `code`, `price`, `amount`, `worker_id`, `created_at`, `updated_at`) VALUES
-(1, 'naru', 'hodo', 30000, 12, NULL, '2023-03-11 04:36:36', NULL),
-(3, 'wewq', 'ewqeqw', 30000, 10, NULL, '2023-03-11 04:36:38', NULL),
-(4, 'vitka', '2342', 10000, 16, NULL, '2023-03-11 04:36:39', NULL),
-(5, 'tes', 'TES0787', 20000, 10, NULL, '2023-04-11 04:37:32', '2023-04-11 04:37:32'),
-(6, 'bunga', 'bnga', 1000, 1, 1, '2024-12-10 11:27:52', '2024-12-10 11:27:52');
+(1, 'naru', 'hodo', 30000, -14, 1, '2023-03-11 04:36:36', NULL),
+(3, 'wewq', 'ewqeqw', 30000, -1, 1, '2023-03-11 04:36:38', NULL),
+(4, 'vitka', '2342', 10000, 7, 1, '2023-03-11 04:36:39', NULL),
+(5, 'tes', 'TES0787', 20000, 10, 1, '2023-04-11 04:37:32', '2023-04-11 04:37:32'),
+(6, 'bunga', 'bnga', 1000, -2, 1, '2024-12-10 11:27:52', '2024-12-10 11:27:52');
 
 -- --------------------------------------------------------
 
@@ -194,6 +202,7 @@ INSERT INTO `products` (`id`, `name`, `code`, `price`, `amount`, `worker_id`, `c
 -- Struktur dari tabel `tickets`
 --
 
+DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
@@ -227,6 +236,7 @@ INSERT INTO `tickets` (`id`, `user_id`, `department_id`, `topic_id`, `priority_i
 -- Struktur dari tabel `ticket_details`
 --
 
+DROP TABLE IF EXISTS `ticket_details`;
 CREATE TABLE `ticket_details` (
   `id` bigint UNSIGNED NOT NULL,
   `ticket_id` bigint UNSIGNED NOT NULL,
@@ -252,6 +262,7 @@ INSERT INTO `ticket_details` (`id`, `ticket_id`, `date`, `chat`, `user_id`, `pho
 -- Struktur dari tabel `topics`
 --
 
+DROP TABLE IF EXISTS `topics`;
 CREATE TABLE `topics` (
   `id` bigint UNSIGNED NOT NULL,
   `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -274,6 +285,7 @@ INSERT INTO `topics` (`id`, `name`, `department_id`, `created_at`, `updated_at`)
 -- Struktur dari tabel `transaction_in`
 --
 
+DROP TABLE IF EXISTS `transaction_in`;
 CREATE TABLE `transaction_in` (
   `id` bigint UNSIGNED NOT NULL,
   `price` int NOT NULL,
@@ -287,8 +299,8 @@ CREATE TABLE `transaction_in` (
 --
 
 INSERT INTO `transaction_in` (`id`, `price`, `worker_id`, `created_at`, `updated_at`) VALUES
-(19, 700000, NULL, '2023-04-10 20:22:38', '2023-04-10 20:22:38'),
-(20, 20000, NULL, '2023-04-11 03:50:58', '2023-04-11 03:50:58'),
+(19, 700000, 1, '2023-04-10 20:22:38', '2023-04-10 20:22:38'),
+(20, 20000, 1, '2023-04-11 03:50:58', '2023-04-11 03:50:58'),
 (22, 1090000, 1, '2024-11-23 17:23:39', '2024-11-23 17:23:39'),
 (24, 13000, 1, '2024-12-10 11:28:44', '2024-12-10 11:28:44');
 
@@ -298,6 +310,7 @@ INSERT INTO `transaction_in` (`id`, `price`, `worker_id`, `created_at`, `updated
 -- Struktur dari tabel `transaction_in_details`
 --
 
+DROP TABLE IF EXISTS `transaction_in_details`;
 CREATE TABLE `transaction_in_details` (
   `id` bigint UNSIGNED NOT NULL,
   `transaction_id` bigint UNSIGNED DEFAULT NULL,
@@ -328,6 +341,7 @@ INSERT INTO `transaction_in_details` (`id`, `transaction_id`, `product_id`, `pri
 --
 -- Trigger `transaction_in_details`
 --
+DROP TRIGGER IF EXISTS `transaction_in_delete`;
 DELIMITER $$
 CREATE TRIGGER `transaction_in_delete` BEFORE DELETE ON `transaction_in_details` FOR EACH ROW BEGIN
   UPDATE products
@@ -336,6 +350,7 @@ CREATE TRIGGER `transaction_in_delete` BEFORE DELETE ON `transaction_in_details`
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `transaction_in_insert`;
 DELIMITER $$
 CREATE TRIGGER `transaction_in_insert` AFTER INSERT ON `transaction_in_details` FOR EACH ROW BEGIN
   UPDATE products
@@ -351,6 +366,7 @@ DELIMITER ;
 -- Struktur dari tabel `transaction_out`
 --
 
+DROP TABLE IF EXISTS `transaction_out`;
 CREATE TABLE `transaction_out` (
   `id` bigint UNSIGNED NOT NULL,
   `price` int NOT NULL,
@@ -364,13 +380,7 @@ CREATE TABLE `transaction_out` (
 --
 
 INSERT INTO `transaction_out` (`id`, `price`, `worker_id`, `created_at`, `updated_at`) VALUES
-(19, 60000, NULL, '2023-04-11 06:28:52', '2023-04-11 06:28:52'),
-(20, 30000, 1, '2024-10-29 11:15:28', '2024-10-29 11:15:28'),
-(21, 180000, 1, '2024-11-23 17:53:31', '2024-11-23 17:53:31'),
-(22, 0, 1, '2024-11-23 17:53:37', '2024-11-23 17:53:37'),
-(23, 90000, 1, '2024-11-23 17:56:32', '2024-11-23 17:56:32'),
-(24, 210000, 1, '2024-11-23 17:56:52', '2024-11-23 17:56:52'),
-(25, 83000, 1, '2024-12-10 11:30:43', '2024-12-10 11:30:43');
+(28, 150000, 1, '2024-12-13 13:08:51', '2024-12-13 13:08:51');
 
 -- --------------------------------------------------------
 
@@ -378,6 +388,7 @@ INSERT INTO `transaction_out` (`id`, `price`, `worker_id`, `created_at`, `update
 -- Struktur dari tabel `transaction_out_details`
 --
 
+DROP TABLE IF EXISTS `transaction_out_details`;
 CREATE TABLE `transaction_out_details` (
   `id` bigint UNSIGNED NOT NULL,
   `transaction_id` bigint UNSIGNED NOT NULL,
@@ -393,23 +404,14 @@ CREATE TABLE `transaction_out_details` (
 --
 
 INSERT INTO `transaction_out_details` (`id`, `transaction_id`, `product_id`, `price`, `amount`, `created_at`, `updated_at`) VALUES
-(21, 19, 1, 30000, 2, NULL, NULL),
-(22, 20, 1, 30000, 1, NULL, NULL),
-(23, 21, 1, 30000, 2, NULL, NULL),
-(24, 21, 1, 30000, 1, NULL, NULL),
-(25, 21, 3, 30000, 3, NULL, NULL),
-(26, 23, 1, 30000, 1, NULL, NULL),
-(27, 23, 1, 30000, 2, NULL, NULL),
-(28, 24, 1, 30000, 2, NULL, NULL),
-(29, 24, 3, 30000, 2, NULL, NULL),
-(30, 24, 1, 30000, 3, NULL, NULL),
-(31, 25, 6, 1000, 3, NULL, NULL),
-(32, 25, 4, 10000, 2, NULL, NULL),
-(33, 25, 1, 30000, 2, NULL, NULL);
+(38, 28, 1, 30000, 2, NULL, NULL),
+(39, 28, 3, 30000, 2, NULL, NULL),
+(40, 28, 4, 10000, 3, NULL, NULL);
 
 --
 -- Trigger `transaction_out_details`
 --
+DROP TRIGGER IF EXISTS `transaction_out_delete`;
 DELIMITER $$
 CREATE TRIGGER `transaction_out_delete` BEFORE DELETE ON `transaction_out_details` FOR EACH ROW BEGIN
   UPDATE products
@@ -418,6 +420,7 @@ CREATE TRIGGER `transaction_out_delete` BEFORE DELETE ON `transaction_out_detail
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `transaction_out_insert`;
 DELIMITER $$
 CREATE TRIGGER `transaction_out_insert` AFTER INSERT ON `transaction_out_details` FOR EACH ROW BEGIN
   UPDATE products
@@ -433,6 +436,7 @@ DELIMITER ;
 -- Struktur dari tabel `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -456,7 +460,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `level_id`, `photo`, `re
 (6, 'kakashi', 'kakashi@gmail.com', '$2y$10$7c0gvNEyA1C59HKVoqI0IORh33Bfas4Wv57eM6dE1znVcRIxh2Gci', 2, NULL, NULL, '2023-04-03 21:29:40', '2023-04-03 21:49:15'),
 (7, 'tes', 'tes@gmail.com', '$2y$10$mComFEo4ABwbqguaI9VsSeyYbISP.lCJ.WieICU31006f7bVCfRHe', 3, NULL, NULL, '2023-04-04 00:02:48', '2023-04-04 00:02:48'),
 (10, 'tessa', 'teasdas@gmail.com', '$2y$10$0HXpQgECkNhTXa6BlKAxhOUaHUnCcEF18ny8RyntbKfT3zTFZ4DJS', 3, NULL, NULL, '2024-12-10 12:04:52', '2024-12-10 12:04:52'),
-(11, 'dasda', 'dassda@jmail.com', '$2y$10$HAKyPpH2xOXl8OkugSqeyeGcE6pKXMs8F4Cg6GMfsU6TAecUsZHVC', 3, NULL, NULL, '2024-12-10 12:05:35', '2024-12-10 12:05:35');
+(11, 'dasda', 'dassda@jmail.com', '$2y$10$HAKyPpH2xOXl8OkugSqeyeGcE6pKXMs8F4Cg6GMfsU6TAecUsZHVC', 3, NULL, NULL, '2024-12-10 12:05:35', '2024-12-10 12:05:35'),
+(12, 'dada', 'dada@jmail.com', '$2y$10$yO.ZcL4tqhLjr.Ueclz5ZOa7/oWo5MrdizybNylNHWUOzcBf.p/JW', 3, NULL, NULL, '2024-12-12 12:14:17', '2024-12-12 12:14:17'),
+(13, 'Mario', 'mario@jmail.com', '$2y$10$Hy/mkLZ6y0TAuROJhA/3y.eD29d6XbIAxE/4cjkAT3Ju6qCMLwb.i', 3, NULL, NULL, '2024-12-13 11:29:10', '2024-12-13 11:29:10'),
+(14, 'nelson', 'nelson@jmail.com', '$2y$10$jQApqoJ/5eCYQusjztkzwu0FL/GY0CcxuoQRvtmwgssP7/PlUZj02', 3, NULL, NULL, '2024-12-13 11:30:02', '2024-12-13 11:30:02');
 
 -- --------------------------------------------------------
 
@@ -464,6 +471,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `level_id`, `photo`, `re
 -- Struktur dari tabel `workers`
 --
 
+DROP TABLE IF EXISTS `workers`;
 CREATE TABLE `workers` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -486,7 +494,10 @@ INSERT INTO `workers` (`id`, `name`, `NIK`, `number`, `user_id`, `department_id`
 (4, 'lord hokage', '312312', '32123', 6, NULL, '2023-04-03 21:29:40', '2023-04-03 21:49:15'),
 (5, 'tes', '434', '2342', 7, 5, '2023-04-04 00:02:48', '2023-04-04 00:02:48'),
 (7, 'tessa', '23423', '4523452344', 10, 6, '2024-12-10 12:04:52', '2024-12-10 12:04:52'),
-(8, 'dasda', '342423', '424523423', 11, 6, '2024-12-10 12:05:35', '2024-12-10 12:05:35');
+(8, 'dasda', '342423', '424523423', 11, 6, '2024-12-10 12:05:35', '2024-12-10 12:05:35'),
+(9, 'Hatake', '24234234', '63535347', 12, 6, '2024-12-12 12:14:17', '2024-12-12 12:14:17'),
+(10, 'Mario', '534534534', '6345634', 13, 6, '2024-12-13 11:29:10', '2024-12-13 11:29:10'),
+(11, 'Nelson', '67456745645', '7474566745', 14, 6, '2024-12-13 11:30:02', '2024-12-13 11:30:02');
 
 --
 -- Indexes for dumped tables
@@ -697,25 +708,25 @@ ALTER TABLE `transaction_in_details`
 -- AUTO_INCREMENT untuk tabel `transaction_out`
 --
 ALTER TABLE `transaction_out`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaction_out_details`
 --
 ALTER TABLE `transaction_out_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `workers`
 --
 ALTER TABLE `workers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
