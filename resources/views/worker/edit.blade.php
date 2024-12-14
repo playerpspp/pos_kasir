@@ -47,7 +47,11 @@
                                     <div class="form-group">
                                         <label for="department">department:</label><br>
                                         <select type="text" class="form-control" id="department" name="department" value="{{old('department')}}" required>
-                                        <option value="{{$user->worker->department->id}}">{{$user->department->name}}</option>
+                                        @if(isset($user->worker->department->id))
+                                        <option value="{{$user->worker->department->id}}">{{$user->worker->department->name}}</option>
+                                        @else
+                                        <option value="">Choose Department</option>
+                                        @endif
                                             @foreach ($departments as $department)
                                             <option value="{{$department->id}}">{{$department->name}}</option>
                                             @endforeach
@@ -57,7 +61,8 @@
                                     <div class="form-group">
                                         <label>Level</label>
                                         <select id="level" name="level" class="form-control">
-                                        @if ($user->level->level != "head")
+
+                                        @if (isset($user->level->level))
                                             <option value="{{$user->level->id}}">{{$user->level->level}}</option>
                                         @endif
                                         @foreach($level as $level)

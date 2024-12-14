@@ -48,17 +48,29 @@
                                     <td>{{ $worker->name }}</td>
                                     <td>{{ $worker->NIK }}</td>
                                     <td>{{ $worker->number }}</td>
-                                    <td>{{ $worker->user->level->level }}</td>
-                                    <td>{{ $worker->user->name }}</td>
-                                    @if(isset($worker->department->name))
-                                    <td>{{ $worker->department->name}}</td>
+
+                                    @if(isset($worker->user->name))
+                                        <td>{{ $worker->user->level->level }}</td>
                                     @else
-                                    <td>N/A</td>
+                                        <td>User has been Removed</td>
                                     @endif
+                                    @if(isset($worker->user->name))
+                                        <td>{{ $worker->user->name }}</td>
+                                    @else
+                                        <td>User has been Removed</td>
+                                    @endif
+                                    @if(isset($worker->department->name))
+                                        <td>{{ $worker->department->name}}</td>
+                                    @else
+                                        <td>N/A</td>
+                                    @endif
+                                    
                                     <td>
+                                    @if(isset($worker->user->name))
                                         <a href="/workers/edit/{{$worker->user->id}}"><button class="btn btn-warning" title="Edit"><i class="ti-pencil-alt"></i></button></a>
 
                                         <a href="/workers/actdelete/{{$worker->user->id}}"><button class="btn btn-danger" title="Delete"><i class="ti-trash"></i></button></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @php
