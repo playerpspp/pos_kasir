@@ -27,7 +27,7 @@
 
 
                         <div class="basic-form">
-                            <form autocomplete="on" action="/Products/update" id="form_input" method="POST">
+                            <form autocomplete="on" action="/products/update" id="form_input" method="POST">
                                 @csrf
 
                                 <input type="hidden" id="id" name="id" value="{{ $product->id }}">
