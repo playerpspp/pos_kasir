@@ -54,7 +54,7 @@
                         @endif
 
                         <td>
-                            <a href="/departments/members/{{$department->id}}" class="btn btn-primary btn-box" title="Edit" title="Members"><i class="ti-user"></i></a>
+                            <a href="/departments/members/{{$department->id}}" class="btn btn-primary btn-box" title="Members"><i class="ti-user"></i></a>
                                 <a href="/departments/edit/{{$department->id}}/{{$department->head_id}}" class="btn btn-warning btn-box" title="Edit"><i class="ti-pencil-alt"></i></a>
                                 <!-- <a href="/departments/actdelete/{{$department->id}}" class="btn btn-danger btn-box" title="Delete"><i class="ti-trash"></i></a> -->
                             </td>
