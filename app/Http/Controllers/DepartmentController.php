@@ -137,7 +137,7 @@ class DepartmentController extends Controller
 
             $department = Department::with('user')->where('id', $id)->first();
 
-            $work = Worker::where('user_id', $department->head_id)->get();
+            $work = Worker::where('department_id', $department->id)->get();
 
             return view('department.edit', [
                 'work' => $work,

@@ -77,7 +77,7 @@ CREATE TABLE `levels` (
 INSERT INTO `levels` (`id`, `level`) VALUES
 (1, 'Admin'),
 (2, 'head'),
-(3, 'perkerja');
+(3, 'pekerja');
 
 -- --------------------------------------------------------
 
