@@ -51,7 +51,7 @@ class WorkerController extends Controller
                 'number' => 'required|max:16',
                 'level' => 'required',
                 'email' => 'required|unique:users,email',
-                'department'=> 'required'
+                // 'department'=> 'required'
             ]);
             if ($validate->fails())
             {
@@ -104,7 +104,7 @@ class WorkerController extends Controller
                 'NIK' => 'required|max:15',
                 'number' => 'required|max:10',
                 'level' => 'required',
-                'department'=>'required'
+                // 'department'=>'required'
             ]);
             if ($validate->fails())
             {

@@ -46,7 +46,7 @@
 
                                     <div class="form-group">
                                         <label for="department">department:</label><br>
-                                        <select type="text" class="form-control" id="department" name="department" value="{{old('department')}}" required>
+                                        <select type="text" class="form-control" id="department" name="department" value="{{old('department')}}">
                                         @if(isset($user->worker->department->id))
                                         <option value="{{$user->worker->department->id}}">{{$user->worker->department->name}}</option>
                                         @else

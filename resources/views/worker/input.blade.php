@@ -43,7 +43,7 @@
 
                                     <div class="form-group">
                                         <label for="department">Department:</label><br>
-                                        <select type="text" class="form-control" id="department" name="department" value="{{old('department')}}" required>
+                                        <select type="text" class="form-control" id="department" name="department" value="{{old('department')}}">
                                             <option value="">Choose Department</option>
                                             @foreach ($departments as $department)
                                             <option value="{{$department->id}}">{{$department->name}}</option>
