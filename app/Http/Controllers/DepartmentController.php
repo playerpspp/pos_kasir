@@ -131,7 +131,7 @@ class DepartmentController extends Controller
 
     }
 
-    public function edit($id, $head)
+    public function edit($id)
     {
         
 

@@ -98,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/departments', 'App\Http\Controllers\DepartmentController@index');
     // Route::get('/departments/actdelete/{id}', 'App\Http\Controllers\DepartmentController@delete');
-    Route::get('/departments/edit/{id}/{head}', 'App\Http\Controllers\DepartmentController@edit');
+    Route::get('/departments/edit/{id}', 'App\Http\Controllers\DepartmentController@edit');
     Route::get('/departments/input', 'App\Http\Controllers\DepartmentController@show');
     Route::get('/departments/reset/{id}', 'App\Http\Controllers\DepartmentController@reset');
     Route::get('/departments/members/{id}', 'App\Http\Controllers\DepartmentController@members');
