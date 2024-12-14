@@ -14,7 +14,7 @@
            @endif
            <div class="card">
             <div class="card-title pr">
-                <h4>Laporan Produk</h4>
+                <h4>Laporan product</h4>
             </div>
             <br>
             <div class="card-body">
@@ -38,7 +38,7 @@
    <div class="col-lg-12">
     <div class="card">
         <div class="card-title pr">
-            <h4>Laporan Pemasukan Produk</h4>
+            <h4>Laporan Pemasukan product</h4>
         </div>
         <br>
         <div class="card-body">
@@ -62,7 +62,7 @@
    <div class="col-lg-12">
     <div class="card">
         <div class="card-title pr">
-            <h4>Laporan Penjualan Produk</h4>
+            <h4>Laporan Penjualan product</h4>
         </div>
         <br>
         <div class="card-body">
