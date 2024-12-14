@@ -30,7 +30,7 @@
                         <li><a href="/transaction_out">Purchase Outcome </a></li>
                     </ul>
                 </li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-product"></i> Tickets <span
+                <!-- <li><a class="sidebar-sub-toggle"><i class="ti-product"></i> Tickets <span
                     class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                       @if(Auth::User()->level->level == "head" || Auth::User()->worker->user_id == Auth::User()->worker->department->head_id )
@@ -42,7 +42,7 @@
                       <li><a href="/topics">Topic</a></li>
                       @endif
                   </ul>
-              </li>
+              </li> -->
 
               @if(Auth::User()->level->level == "Admin" || Auth::User()->level->level == "head")
               <li><a href="/laporan"><i class="ti-files"></i>Laporan</a></li>
